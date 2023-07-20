@@ -7,4 +7,6 @@ class ImagesPath
   static const String face='assets/images/face.png';
   static const String google='assets/images/google.png';
   static const String ios='assets/images/ios.png';
+  static const String banner1='assets/images/banner1.png';
+  static const String banner2='assets/images/banner2.png';
 }
