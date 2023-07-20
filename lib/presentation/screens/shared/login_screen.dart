@@ -86,7 +86,7 @@ class LoginScreen extends StatelessWidget {
         children: [
           Container(
             width: w / 430 * 372,
-            height: h / 923 * 345,
+            height: h / 932 * 345,
             decoration: BoxDecoration(
                 color: AppColor.white,
                 borderRadius: BorderRadius.circular(w / 430 * 40),
@@ -119,8 +119,6 @@ class LoginScreen extends StatelessWidget {
                     ),
                     Spacer(),
                     MyFormFiled(
-                        w: w,
-                        h: h,
                         textInputType: TextInputType.name,
                         controller: nameController,
                         hint: "Enter your Name"),
@@ -128,8 +126,6 @@ class LoginScreen extends StatelessWidget {
                       height: h / 932 * 17,
                     ),
                     MyFormFiled(
-                      w: w,
-                      h: h,
                       textInputType: TextInputType.phone,
                       controller: phoneController,
                       hint: 'Enter your phone',

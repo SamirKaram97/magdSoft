@@ -4,7 +4,9 @@ import 'package:magdsoft_flutter_structure/business_logic/login_bloc/bloc.dart';
 import 'package:magdsoft_flutter_structure/business_logic/otp_bloc/bloc.dart';
 import 'package:magdsoft_flutter_structure/business_logic/repository/data_repo.dart';
 import 'package:magdsoft_flutter_structure/business_logic/usecase/get_help_usecase.dart';
+import 'package:magdsoft_flutter_structure/business_logic/usecase/get_products_usecase.dart';
 
+import 'business_logic/home_bloc/bloc.dart';
 import 'business_logic/repository/login_repo.dart';
 import 'business_logic/usecase/login_usecase.dart';
 import 'business_logic/usecase/otp_usecase.dart';
@@ -22,6 +24,7 @@ init()async
   sl.registerFactory(() => LoginBloc(sl()));
   sl.registerFactory(() => OtpBloc(sl()));
   sl.registerFactory(() => HelpBloc(sl()));
+  sl.registerFactory(() => ProductsBloc(sl()));
 
 
   //use cases
@@ -29,10 +32,11 @@ init()async
   sl.registerLazySingleton(() => LoginUseCase(sl()));
   sl.registerLazySingleton(() => OtpUseCase(sl()));
   sl.registerLazySingleton(() => GetHelpUseCase(sl()));
+  sl.registerLazySingleton(() => GetProductUseCase(sl()));
 
 
   //repository
-  sl.registerLazySingleton<LoginRepository>(() => LoginRepositoryImpl());
+  sl.registerLazySingleton<AuthRepository>(() => AuthRepositoryImpl());
   sl.registerLazySingleton<DataRepository>(() => DataRepositoryImpl());
 
 

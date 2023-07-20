@@ -10,6 +10,7 @@ import 'package:magdsoft_flutter_structure/business_logic/bloc_observer.dart';
 import 'package:magdsoft_flutter_structure/business_logic/global_cubit/global_cubit.dart';
 import 'package:magdsoft_flutter_structure/business_logic/help_bloc/bloc.dart';
 import 'package:magdsoft_flutter_structure/business_logic/help_bloc/events.dart';
+import 'package:magdsoft_flutter_structure/business_logic/home_bloc/events.dart';
 import 'package:magdsoft_flutter_structure/business_logic/otp_bloc/bloc.dart';
 import 'package:magdsoft_flutter_structure/data/data_providers/local/cache_helper.dart';
 import 'package:magdsoft_flutter_structure/data/data_providers/remote/dio_helper.dart';
@@ -19,6 +20,7 @@ import 'package:magdsoft_flutter_structure/presentation/widget/toast.dart';
 import 'package:sizer/sizer.dart';
 import 'package:intl/intl.dart';
 
+import 'business_logic/home_bloc/bloc.dart';
 import 'business_logic/login_bloc/bloc.dart';
 import 'di.dart';
 
@@ -79,6 +81,9 @@ class _MyAppState extends State<MyApp> {
         ),
         BlocProvider(
           create: (context) => HelpBloc(sl())..add(HelpExecuteEvent()),
+        ),
+        BlocProvider(
+          create: (context) => ProductsBloc(sl())..add(GetProductsExecuteEvent()),
         ),
       ],
       child: BlocConsumer<GlobalCubit, GlobalState>(

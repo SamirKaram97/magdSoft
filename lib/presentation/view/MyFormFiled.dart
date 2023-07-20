@@ -8,18 +8,17 @@ import '../styles/colors.dart';
 class MyFormFiled extends StatelessWidget {
    MyFormFiled({
     Key? key,
-    required this.w,
-    required this.h, required this.textInputType, required this.controller, required this.hint,
+     required this.textInputType, required this.controller, required this.hint,
     
   }) : super(key: key);
   final TextInputType textInputType;
   final TextEditingController controller;
-  final double w;
-  final double h;
   final String hint;
 
   @override
   Widget build(BuildContext context) {
+    double w = MediaQuery.of(context).size.width;
+    double h = MediaQuery.of(context).size.height;
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(w/430*10),

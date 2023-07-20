@@ -7,7 +7,7 @@ import '../repository/login_repo.dart';
 
 class OtpUseCase
 {
-  final LoginRepository loginRepository;
+  final AuthRepository loginRepository;
 
   OtpUseCase(this.loginRepository);
 

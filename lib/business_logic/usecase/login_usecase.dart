@@ -6,7 +6,7 @@ import '../../data/network/faliure.dart';
 
 class LoginUseCase
 {
-  final LoginRepository loginRepository;
+  final AuthRepository loginRepository;
 
   LoginUseCase(this.loginRepository);
 

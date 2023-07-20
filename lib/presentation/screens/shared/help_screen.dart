@@ -11,6 +11,7 @@ import 'package:magdsoft_flutter_structure/presentation/styles/colors.dart';
 import 'package:magdsoft_flutter_structure/presentation/view/AppButton.dart';
 
 import '../../../data/models/account_model.dart';
+import '../../view/AppCard.dart';
 
 class HelpScreen extends StatefulWidget {
   HelpScreen({Key? key, required this.accountModel}) : super(key: key);
@@ -40,7 +41,7 @@ class _HelpScreenState extends State<HelpScreen> {
               child: Column(
                 children: [
                   Text("Help",style: GoogleFonts.inter(color: AppColor.white,fontWeight: FontWeight.w400,fontSize: w / 430 * 30),),
-                  Expanded(child: ListView.separated(itemBuilder: (context, index) =>_helpCard(w: w,helpModelList: bloc.helpList,index: index) , separatorBuilder: (context, index) => SizedBox(height: h/932*27,), itemCount:bloc.helpList.length)),
+                  Expanded(child: ListView.separated(itemBuilder: (context, index) =>AppCard(padding: EdgeInsets.all(w/430*13),child: _cardColumn(bloc.helpList!, index, w, bloc)) , separatorBuilder: (context, index) => SizedBox(height: h/932*27,), itemCount:bloc.helpList!.length)),
                   AppButton(onPressed: (){
                     Navigator.pushReplacementNamed(context, RouteNames.homeRoute,arguments: widget.accountModel);
                   }, text: "Continue", height: w / 430 * 50)
@@ -60,34 +61,27 @@ class _HelpScreenState extends State<HelpScreen> {
     );
   }
 
-  Container _helpCard({required double w, required List<HelpModel> helpModelList, required int index}) {
-  var bloc=BlocProvider.of<HelpBloc>(context);
-    return Container(
-              decoration: BoxDecoration(boxShadow: [BoxShadow(color: AppColor.shadowColor.withOpacity(0.25),offset: Offset(w/430*2, w/430*2),blurRadius: w/430*8,spreadRadius: w/430*2),]),
-              child: Card(
-                child: Padding(
-                  padding:  EdgeInsets.all(w / 430 * 13),
-                  child: Column(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                  Row(
-                    children: [
-                       Text(helpModelList[index].question??"",style: GoogleFonts.inter(color: AppColor.primaryBlue,fontSize: w / 430 * 17,fontWeight: FontWeight.w400),),
-                      const Spacer(),
-                      IconButton(onPressed: () {
-                       bloc.changeSelectedIndex(index);
 
-                      }, icon:  Icon(index==bloc.selectedIndex?Icons.keyboard_arrow_up:Icons.keyboard_arrow_down)),
-                    ],
-                  ),
-                  Flex(direction: Axis.vertical,children: [
-                    if(index==bloc.selectedIndex)Text(helpModelList[index].answer??"",style: GoogleFonts.inter(fontSize: w / 430 * 17,fontWeight: FontWeight.w400))
-                  ],)
-              ],
-            ),
+  Column _cardColumn(List<HelpModel> helpModelList, int index, double w, HelpBloc bloc) {
+    return Column(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+                Row(
+                  children: [
+                     Text(helpModelList[index].question??"",style: GoogleFonts.inter(color: AppColor.primaryBlue,fontSize: w / 430 * 17,fontWeight: FontWeight.w400),),
+                    const Spacer(),
+                    IconButton(onPressed: () {
+                     bloc.changeSelectedIndex(index);
+
+                    }, icon:  Icon(index==bloc.selectedIndex?Icons.keyboard_arrow_up:Icons.keyboard_arrow_down)),
+                  ],
                 ),
-              ),
-            );
+                Flex(direction: Axis.vertical,children: [
+                  if(index==bloc.selectedIndex)Text(helpModelList[index].answer??"",style: GoogleFonts.inter(fontSize: w / 430 * 17,fontWeight: FontWeight.w400))
+                ],)
+            ],
+          );
   }
 }
+
