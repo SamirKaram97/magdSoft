@@ -30,6 +30,7 @@ class HomeScreen extends StatelessWidget {
     CategoryItemDataModel(ImagesPath.razer, "Razer"),
   ];
 
+
   @override
   Widget build(BuildContext context) {
     double h = MediaQuery.of(context).size.height;
@@ -37,10 +38,9 @@ class HomeScreen extends StatelessWidget {
 
     return BlocConsumer<ProductsBloc, ProductsState>(
       listener: (context, state) {
-        if(state is ProductsAddtoFavState)
-          {
-            showToast(state: ToastState.SUCCESS, text: "Item added successfully");
-          }
+        if (state is ProductsAddtoFavState) {
+          showToast(state: ToastState.SUCCESS, text: "Item added successfully");
+        }
       },
       builder: (context, state) {
         var bloc = BlocProvider.of<ProductsBloc>(context);
@@ -106,19 +106,23 @@ class HomeScreen extends StatelessWidget {
                           ),
                           Expanded(
                               child: MasonryGridView.count(
-                            itemCount: bloc.productsList!.length,
+                            itemCount: bloc.selectedIndex==1?bloc.acer!.length+1:bloc.selectedIndex==2?bloc.razer!.length+1:bloc.productsList!.length+1,
                             shrinkWrap: true,
                             crossAxisCount: 2,
                             mainAxisSpacing: h / designHeight * 2,
                             crossAxisSpacing: w / designWidth * 2,
-                            itemBuilder: (context, index) => index == 0
+                            itemBuilder: (context, index) {
+                              var list=bloc.selectedIndex==1?bloc.acer!:bloc.selectedIndex==2?bloc.razer!:bloc.productsList!;
+                              print(list.length);
+                              return index == 0
                                 ? Text(
                                     "Recommended for You",
                                     style: GoogleFonts.inter(
                                         fontSize: w / designWidth * 30),
                                   )
                                 : _productWidget(
-                                    w, h, index, bloc.productsList!,context),
+                                    w, h, index-1, list, context);
+                            },
                           ))
                         ],
                       ),
@@ -154,116 +158,126 @@ class HomeScreen extends StatelessWidget {
   }
 
   Widget _productWidget(
-      double w, double h, int index, List<ProductModel> productsList,context) {
+      double w, double h, int index, List<ProductModel> productsList, context) {
     return Padding(
       padding: EdgeInsets.all(w / designWidth * 10),
-      child: Container(
-          width: w / designWidth * 168,
-          height: h / designHeight * 239,
-          child: Stack(children: [
-            Container(
-              width: w / designWidth * 168,
-              height: h / designHeight * 239,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(
-                  w / designWidth * 20,
-                ),
-                boxShadow: getBoxShadowApp(h),
-                color: AppColor.white,
-              ),
-              child: Padding(
-                padding: EdgeInsets.only(left: w / designWidth * 9),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      productsList[index].company ?? "",
-                      style: GoogleFonts.inter(
-                          color: AppColor.primaryBlue,
-                          fontSize: w / designWidth * 18),
-                    ),
-                    SizedBox(height: h / designHeight * 3),
-                    Text(productsList[index].name ?? "",
-                        style: GoogleFonts.inter(
-                            color: Colors.black,
-                            fontSize: w / designWidth * 12)),
-                    SizedBox(height: h / designHeight * 8),
-                    Row(
-                      children: [
-                        Text(productsList[index].price ?? ""),
-                        const Spacer(),
-                        Container(
-                          width: w / designWidth * 40,
-                          height: h / designHeight * 40,
-                          decoration: BoxDecoration(
-                            borderRadius: const BorderRadius.only(
-                              topLeft: Radius.circular(20),
-                              bottomRight: Radius.circular(20),
-                            ),
-                            gradient: LinearGradient(
-                                begin: AlignmentDirectional.topStart,
-                                end: AlignmentDirectional.bottomEnd,
-                                colors: [
-                                  AppColor.primaryBlue,
-                                  AppColor.primaryBlue.withOpacity(0.25)
-                                ]),
-                          ),
-                          child: Icon(
-                            Icons.add,
-                            color: Colors.white,
-                          ),
-                        )
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            Stack(
-              children: [
-                Container(
-                    width: w / designWidth * 168,
-                    height: h / designHeight * 142,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(
-                        w / designWidth * 20,
-                      ),
-                      boxShadow: getBoxShadowApp(h),
-                      color: AppColor.white,
-                    ),
-                    child: Stack(
-                      children: [
-                        Padding(
-                          padding: EdgeInsets.all(w / designWidth * 5),
-                          child: Image(
-                            image:
-                                NetworkImage(productsList[index].image ?? ""),
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                        Align(
-                          alignment: AlignmentDirectional.topEnd,
-                          child: InkWell(
-                            onTap: ()async {
-                              await BlocProvider.of<ProductsBloc>(context).addToFav(productsList[index].id!);
+      child: InkWell(
+        onTap: (){
 
-                            },
-                            child: Padding(
-                              padding: EdgeInsets.all(h / designHeight * 10),
-                              child: Image(
-                                width: h / designHeight * 20,
-                                height: h / designHeight * 20,
-                                image:  Svg(BlocProvider.of<ProductsBloc>(context).favList.contains(productsList[index].id!)?ImagesPath.fav_red:ImagesPath.fav),
+        },
+        child: Container(
+            width: w / designWidth * 168,
+            height: h / designHeight * 239,
+            child: Stack(children: [
+              Container(
+                width: w / designWidth * 168,
+                height: h / designHeight * 239,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(
+                    w / designWidth * 20,
+                  ),
+                  boxShadow: getBoxShadowApp(h),
+                  color: AppColor.white,
+                ),
+                child: Padding(
+                  padding: EdgeInsets.only(left: w / designWidth * 9),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        productsList[index].company ?? "",
+                        style: GoogleFonts.inter(
+                            color: AppColor.primaryBlue,
+                            fontSize: w / designWidth * 18),
+                      ),
+                      SizedBox(height: h / designHeight * 3),
+                      Text(productsList[index].name ?? "",
+                          style: GoogleFonts.inter(
+                              color: Colors.black,
+                              fontSize: w / designWidth * 12)),
+                      SizedBox(height: h / designHeight * 8),
+                      Row(
+                        children: [
+                          Text(productsList[index].price ?? ""),
+                          const Spacer(),
+                          Container(
+                            width: w / designWidth * 40,
+                            height: h / designHeight * 40,
+                            decoration: BoxDecoration(
+                              borderRadius: const BorderRadius.only(
+                                topLeft: Radius.circular(20),
+                                bottomRight: Radius.circular(20),
+                              ),
+                              gradient: LinearGradient(
+                                  begin: AlignmentDirectional.topStart,
+                                  end: AlignmentDirectional.bottomEnd,
+                                  colors: [
+                                    AppColor.primaryBlue,
+                                    AppColor.primaryBlue.withOpacity(0.25)
+                                  ]),
+                            ),
+                            child: Icon(
+                              Icons.add,
+                              color: Colors.white,
+                            ),
+                          )
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              Stack(
+                children: [
+                  Container(
+                      width: w / designWidth * 168,
+                      height: h / designHeight * 142,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(
+                          w / designWidth * 20,
+                        ),
+                        boxShadow: getBoxShadowApp(h),
+                        color: AppColor.white,
+                      ),
+                      child: Stack(
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.all(w / designWidth * 5),
+                            child: Image(
+                              image:
+                                  NetworkImage(productsList[index].image ?? ""),
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                          Align(
+                            alignment: AlignmentDirectional.topEnd,
+                            child: InkWell(
+                              onTap: () async {
+                                await BlocProvider.of<ProductsBloc>(context)
+                                    .addToFav(productsList[index].id!);
+                              },
+                              child: Padding(
+                                padding: EdgeInsets.all(h / designHeight * 10),
+                                child: Image(
+                                  width: h / designHeight * 20,
+                                  height: h / designHeight * 20,
+                                  image: Svg(
+                                      BlocProvider.of<ProductsBloc>(context)
+                                              .favList
+                                              .contains(productsList[index].id!)
+                                          ? ImagesPath.fav_red
+                                          : ImagesPath.fav),
+                                ),
                               ),
                             ),
-                          ),
-                        )
-                      ],
-                    )),
-              ],
-            ),
-          ])),
+                          )
+                        ],
+                      )),
+                ],
+              ),
+            ])),
+      ),
     );
   }
 

@@ -15,8 +15,11 @@ import 'events.dart';
 class ProductsBloc extends Bloc<GetProductsEvent, ProductsState> {
   final GetProductUseCase getProductUseCase;
   List<ProductModel>? productsList;
-  List<int> favList=[];
-  int selectedIndex=0;
+  List<ProductModel>? acer;
+  List<ProductModel>? razer;
+
+  List<int> favList = [];
+  int selectedIndex = 0;
 
   ProductsBloc(this.getProductUseCase) : super(ProductsInitialState()) {
     on((event, emit) async {
@@ -25,44 +28,48 @@ class ProductsBloc extends Bloc<GetProductsEvent, ProductsState> {
         var listOrFailure = await getProductUseCase();
         listOrFailure.fold((l) {
           emit(ProductsErrorState(l.message));
-        }, (r)  {
-          productsList=r;
+        }, (r) {
+          acer = [];
+          razer = [];
+          r.forEach((element) {
+            if (element.company == "Acer") {
+              acer!.add(element);
+            } else if (element.company == 'Razer') {
+              razer!.add(element);
+            } else {
+
+            }
+            print(element.company == 'Razer');
+            print(razer);
+          });
+          productsList = r;
           emit(ProductsSuccessState(r));
         });
       }
     });
   }
 
-
-
-  void changeSelectedIndex(int index)
-  {
-    selectedIndex=index;
+  void changeSelectedIndex(int index) {
+    selectedIndex = index;
     emit(ProductsChangeSelectedIndexState());
   }
 
-  Future addToFav(int id)async
-  {
-    if(favList.contains(id))
-      {
-        favList.remove(id);
-      }
-    else
-      {
-        favList.add(id);
-      }
-    await CacheHelper.saveDataSharedPreference(key: "fav", value: jsonEncode(favList));
+  Future addToFav(int id) async {
+    if (favList.contains(id)) {
+      favList.remove(id);
+    } else {
+      favList.add(id);
+    }
+    await CacheHelper.saveDataSharedPreference(
+        key: "fav", value: jsonEncode(favList));
     emit(ProductsAddtoFavState(id));
   }
 
-
-  void getFav()
-  {
-    String? stringFavList=CacheHelper.getDataFromSharedPreference(key: "fav");
-    if(stringFavList!=null)
-      {
-        favList=json.decode(stringFavList).cast<int>();
-      }
+  void getFav() {
+    String? stringFavList = CacheHelper.getDataFromSharedPreference(key: "fav");
+    if (stringFavList != null) {
+      favList = json.decode(stringFavList).cast<int>();
+    }
 
     print(favList);
   }
