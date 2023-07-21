@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:magdsoft_flutter_structure/data/models/account_model.dart';
+import 'package:magdsoft_flutter_structure/data/models/product_model.dart';
 import 'package:magdsoft_flutter_structure/presentation/screens/shared/login_screen.dart';
+import 'package:magdsoft_flutter_structure/presentation/screens/shared/proudect_screen.dart';
 
 import '../screens/shared/help_screen.dart';
 import '../screens/shared/home_scren.dart';
@@ -20,6 +22,8 @@ class AppRouter {
         return MaterialPageRoute(builder: (_) =>   HomeScreen(accountModel: settings.arguments as AccountModel));
         case '/help':
         return MaterialPageRoute(builder: (_) =>    HelpScreen(accountModel: settings.arguments as AccountModel));
+        case '/product':
+        return MaterialPageRoute(builder: (_) =>    ProductScreen(model: settings.arguments as ProductModel));
       default:
         return null;
     }
@@ -34,4 +38,5 @@ class RouteNames
   static const otpRoute='/otp';
   static const homeRoute='/home';
   static const helpRoute='/help';
+  static const productRoute='/product';
 }

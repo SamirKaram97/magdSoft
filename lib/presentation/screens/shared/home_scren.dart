@@ -9,6 +9,7 @@ import 'package:magdsoft_flutter_structure/business_logic/home_bloc/bloc.dart';
 import 'package:magdsoft_flutter_structure/business_logic/home_bloc/states.dart';
 import 'package:magdsoft_flutter_structure/data/models/account_model.dart';
 import 'package:magdsoft_flutter_structure/data/models/product_model.dart';
+import 'package:magdsoft_flutter_structure/presentation/router/app_router.dart';
 import 'package:magdsoft_flutter_structure/presentation/screens/shared/help_screen.dart';
 import 'package:magdsoft_flutter_structure/presentation/screens/shared/otp_screen.dart';
 import 'package:magdsoft_flutter_structure/presentation/styles/colors.dart';
@@ -163,7 +164,7 @@ class HomeScreen extends StatelessWidget {
       padding: EdgeInsets.all(w / designWidth * 10),
       child: InkWell(
         onTap: (){
-
+          Navigator.pushNamed(context, RouteNames.productRoute,arguments: productsList[index]);
         },
         child: Container(
             width: w / designWidth * 168,

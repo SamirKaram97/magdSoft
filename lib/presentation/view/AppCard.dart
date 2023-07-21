@@ -18,7 +18,7 @@ class AppCard extends StatelessWidget {
     double w = MediaQuery.of(context).size.width;
     double h = MediaQuery.of(context).size.height;
     return Container(
-      decoration: BoxDecoration(boxShadow: getBoxShadowApp(h)),
+      decoration: BoxDecoration(boxShadow: [BoxShadow(color: AppColor.shadowColor.withOpacity(0.25),offset: Offset(w/designWidth*2, w/designWidth*2),blurRadius: w/designWidth*8,spreadRadius: w/designWidth*2),]),
       child: Card(
         child: Padding(
           padding:  padding,

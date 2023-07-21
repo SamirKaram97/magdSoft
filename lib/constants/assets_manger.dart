@@ -14,4 +14,5 @@ class ImagesPath
   static const String acer='assets/images/acer.png';
   static const String fav='assets/images/fav.svg';
   static const String fav_red='assets/images/fav_red.svg';
+  static const String acerll='assets/images/acerll.png';
 }
