@@ -9,6 +9,7 @@ import 'package:magdsoft_flutter_structure/presentation/styles/colors.dart';
 import 'package:magdsoft_flutter_structure/presentation/view/AppButton.dart';
 
 import '../../../business_logic/otp_bloc/events.dart';
+import '../../../constants/constatnts.dart';
 import '../../router/app_router.dart';
 import '../../widget/toast.dart';
 
@@ -64,17 +65,17 @@ class _OtpScreenState extends State<OtpScreen> {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         SizedBox(
-          height: h / 932 * 62,
+          height: h/designHeight * 62,
         ),
         Text(
           "Verify Phone",
           style: GoogleFonts.inter(
               fontWeight: FontWeight.w400,
-              fontSize: h / 932 * 30,
+              fontSize: h/designHeight * 30,
               color: AppColor.white),
         ),
         SizedBox(
-          height: h / 932 * 138,
+          height: h/designHeight * 138,
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -85,7 +86,7 @@ class _OtpScreenState extends State<OtpScreen> {
           ],
         ),
         SizedBox(
-          height: h / 932 * 90,
+          height: h/designHeight * 90,
         ),
         InkWell(
             onTap: () {},
@@ -93,16 +94,16 @@ class _OtpScreenState extends State<OtpScreen> {
               "Resend code",
               style: GoogleFonts.inter(
                   color: AppColor.primaryBlue,
-                  fontSize: h / 932 * 20,
+                  fontSize: h/designHeight * 20,
                   fontWeight: FontWeight.w400),
             )),
-        SizedBox(height: h / 932 * 78,),
+        SizedBox(height: h/designHeight * 78,),
         Padding(
-          padding:  EdgeInsets.symmetric(horizontal:  h / 932 * 44),
+          padding:  EdgeInsets.symmetric(horizontal:  h/designHeight * 44),
           child: AppButton(onPressed: ()async{
             String code= controllers[0].text+controllers[1].text+controllers[2].text+controllers[3].text;
             BlocProvider.of<OtpBloc>(context).add(OtpExecuteEvent(OtpRequest(phone: phone,code: code)));
-          },height: h / 932 * 60, text: "Verify"),
+          },height: h/designHeight * 60, text: "Verify"),
         )
       ],
     );
@@ -111,20 +112,14 @@ class _OtpScreenState extends State<OtpScreen> {
   Widget _otpFormFiled(TextEditingController controller, h, w, context,
       {TextInputType? textInputType, bool? isLast, bool? isFirst}) {
     return Padding(
-      padding: EdgeInsets.all(w / 430 * 9.5),
+      padding: EdgeInsets.all(w / designWidth * 9.5),
       child: Container(
-        width: w / 430 * 70,
-        height: w / 430 * 80,
+        width: w / designWidth * 70,
+        height: w / designWidth * 80,
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(w / 430 * 15),
+            borderRadius: BorderRadius.circular(w / designWidth * 15),
             color: AppColor.white,
-            boxShadow: [
-              BoxShadow(
-                  color: AppColor.shadowColor.withOpacity(0.25),
-                  offset: Offset(w / 430 * 2, w / 430 * 2),
-                  blurRadius: w / 430 * 8,
-                  spreadRadius: w / 430 * 2)
-            ]),
+            boxShadow: getBoxShadowApp(h)),
         child: Center(
           child: TextFormField(
               controller: controller,
@@ -148,7 +143,7 @@ class _OtpScreenState extends State<OtpScreen> {
               ],
               decoration: InputDecoration(
                   border: InputBorder.none,
-                  contentPadding: EdgeInsetsDirectional.all(w / 430 * 9.5))),
+                  contentPadding: EdgeInsetsDirectional.all(w / designWidth * 9.5))),
         ),
       ),
     );

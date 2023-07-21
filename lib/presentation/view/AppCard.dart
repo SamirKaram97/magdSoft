@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../business_logic/help_bloc/bloc.dart';
+import '../../constants/constatnts.dart';
 import '../styles/colors.dart';
 
 class AppCard extends StatelessWidget {
@@ -17,7 +18,7 @@ class AppCard extends StatelessWidget {
     double w = MediaQuery.of(context).size.width;
     double h = MediaQuery.of(context).size.height;
     return Container(
-      decoration: BoxDecoration(boxShadow: [BoxShadow(color: AppColor.shadowColor.withOpacity(0.25),offset: Offset(w/430*2, w/430*2),blurRadius: w/430*8,spreadRadius: w/430*2),]),
+      decoration: BoxDecoration(boxShadow: getBoxShadowApp(h)),
       child: Card(
         child: Padding(
           padding:  padding,

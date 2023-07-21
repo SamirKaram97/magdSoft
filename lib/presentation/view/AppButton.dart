@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../constants/constatnts.dart';
 import '../styles/colors.dart';
 
 class AppButton extends StatelessWidget {
@@ -38,7 +39,7 @@ class AppButton extends StatelessWidget {
               child: Text(text,style: GoogleFonts.inter(
                   color: AppColor.white,
                   fontWeight: FontWeight.w400,
-                  fontSize: h / 932 * 20),),
+                  fontSize: h/designHeight * 20),),
             )),
       ),
     );

@@ -42,3 +42,15 @@ class ProductsErrorState extends ProductsState{
 
   ProductsErrorState(this.message);
 }
+
+class ProductsChangeSelectedIndexState extends ProductsState{}
+class ProductsAddtoFavState extends ProductsState{
+  final int id;
+
+  ProductsAddtoFavState(this.id);
+}
+class ProductsRemoveFromFavState extends ProductsState{
+  final int id;
+
+  ProductsRemoveFromFavState(this.id);
+}

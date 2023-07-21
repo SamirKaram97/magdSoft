@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import '../../constants/constatnts.dart';
 import '../styles/colors.dart';
 
 class MyFormFiled extends StatelessWidget {
@@ -21,9 +22,9 @@ class MyFormFiled extends StatelessWidget {
     double h = MediaQuery.of(context).size.height;
     return Container(
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(w/430*10),
+        borderRadius: BorderRadius.circular(w/designWidth*10),
         color: AppColor.white,
-        boxShadow: [BoxShadow(color: AppColor.shadowColor.withOpacity(0.25),offset: Offset(w/430*2, w/430*2),blurRadius: w/430*8,spreadRadius: w/430*2)]
+        boxShadow: getBoxShadowApp(h)
       ),
       child: TextFormField(
         controller: controller,
@@ -39,7 +40,7 @@ class MyFormFiled extends StatelessWidget {
               border: InputBorder.none,
               hintText: hint,
               contentPadding:
-                  EdgeInsetsDirectional.all(w / 430 * 11))),
+                  EdgeInsetsDirectional.all(w / designWidth * 11))),
     );
   }
 }

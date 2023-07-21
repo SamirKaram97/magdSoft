@@ -83,7 +83,7 @@ class _MyAppState extends State<MyApp> {
           create: (context) => HelpBloc(sl())..add(HelpExecuteEvent()),
         ),
         BlocProvider(
-          create: (context) => ProductsBloc(sl())..add(GetProductsExecuteEvent()),
+          create: (context) => ProductsBloc(sl())..add(GetProductsExecuteEvent())..getFav(),
         ),
       ],
       child: BlocConsumer<GlobalCubit, GlobalState>(

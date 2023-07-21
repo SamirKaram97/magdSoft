@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:dartz/dartz.dart';
 import 'package:magdsoft_flutter_structure/constants/end_points.dart';
 import 'package:magdsoft_flutter_structure/data/models/HelpModel.dart';
@@ -5,6 +7,7 @@ import 'package:magdsoft_flutter_structure/data/models/product_model.dart';
 import 'package:magdsoft_flutter_structure/data/network/responses/get_help_response.dart';
 import 'package:magdsoft_flutter_structure/data/network/responses/products_response.dart';
 
+import '../../data/data_providers/local/cache_helper.dart';
 import '../../data/data_providers/remote/dio_helper.dart';
 import '../../data/network/faliure.dart';
 
@@ -55,6 +58,7 @@ class DataRepositoryImpl implements DataRepository
       if(productsResponse.status==200)
       {
         List<ProductModel> list=productsResponse.products?.map((e) => ProductModel.fromJson(e.toJson())).toList()??[];
+        //CacheHelper.saveDataSharedPreference(key: "products", value: json.encode(list));
         return right(list);
       }
       else {

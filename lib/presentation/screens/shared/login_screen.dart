@@ -11,6 +11,7 @@ import 'package:magdsoft_flutter_structure/presentation/view/AppButton.dart';
 import '../../../business_logic/login_bloc/bloc.dart';
 import '../../../business_logic/login_bloc/states.dart';
 import '../../../constants/assets_manger.dart';
+import '../../../constants/constatnts.dart';
 import '../../../data/network/requests/login_request.dart';
 import '../../../di.dart';
 import '../../view/BackGraidentImage.dart';
@@ -85,37 +86,31 @@ class LoginScreen extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           Container(
-            width: w / 430 * 372,
-            height: h / 932 * 345,
+            width: w / designWidth * 372,
+            height: h/designHeight * 345,
             decoration: BoxDecoration(
                 color: AppColor.white,
-                borderRadius: BorderRadius.circular(w / 430 * 40),
-                boxShadow: [
-                  BoxShadow(
-                      color: AppColor.shadowColor.withOpacity(0.25),
-                      offset: const Offset(2, 5),
-                      spreadRadius: 5,
-                      blurRadius: 20)
-                ]),
+                borderRadius: BorderRadius.circular(w / designWidth * 40),
+                boxShadow: getBoxShadowApp(h)),
             child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: w / 430 * 25),
+              padding: EdgeInsets.symmetric(horizontal: w / designWidth * 25),
               child: Form(
                 key: formKey,
                 child: Column(
                   children: [
                     SizedBox(
-                      height: h / 932 * 27,
+                      height: h/designHeight * 27,
                     ),
                     Text(
                       "Welcome",
                       style: GoogleFonts.inter(
-                          fontSize: h / 932 * 30, fontWeight: FontWeight.w400),
+                          fontSize: h/designHeight * 30, fontWeight: FontWeight.w400),
                     ),
-                    SizedBox(height: h / 932 * 15.66),
+                    SizedBox(height: h/designHeight * 15.66),
                     Container(
                       color: AppColor.primaryBlue.withOpacity(0.72),
-                      height: h / 932 * 3.13,
-                      width: w / 430 * 143,
+                      height: h/designHeight * 3.13,
+                      width: w / designWidth * 143,
                     ),
                     Spacer(),
                     MyFormFiled(
@@ -123,7 +118,7 @@ class LoginScreen extends StatelessWidget {
                         controller: nameController,
                         hint: "Enter your Name"),
                     SizedBox(
-                      height: h / 932 * 17,
+                      height: h/designHeight * 17,
                     ),
                     MyFormFiled(
                       textInputType: TextInputType.phone,
@@ -131,10 +126,10 @@ class LoginScreen extends StatelessWidget {
                       hint: 'Enter your phone',
                     ),
                     SizedBox(
-                      height: h / 932 * 30,
+                      height: h/designHeight * 30,
                     ),
                     AppButton(
-                        height: h / 932 * 50,
+                        height: h/designHeight * 50,
                         text: "Login",
                         onPressed: onPressed),
                     Spacer(),
@@ -144,13 +139,13 @@ class LoginScreen extends StatelessWidget {
             ),
           ),
           SizedBox(
-            height: h / 932 * 127,
+            height: h/designHeight * 127,
           ),
           Row(
             children: [
               Expanded(
                 child: Padding(
-                  padding: EdgeInsetsDirectional.only(start: w * 30 / 430),
+                  padding: EdgeInsetsDirectional.only(start: w * 30 / designWidth),
                   child: Container(
                     height: 1,
                     color: AppColor.primaryBlue,
@@ -158,13 +153,13 @@ class LoginScreen extends StatelessWidget {
                 ),
               ),
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: w * 10 / 430),
+                padding: EdgeInsets.symmetric(horizontal: w * 10 / designWidth),
                 child: Text("OR",
                     style: GoogleFonts.inter(color: AppColor.primaryBlue)),
               ),
               Expanded(
                 child: Padding(
-                  padding: EdgeInsetsDirectional.only(end: w * 30 / 430),
+                  padding: EdgeInsetsDirectional.only(end: w * 30 / designWidth),
                   child: Container(
                     height: h / 617 * 1,
                     color: AppColor.primaryBlue,
@@ -183,7 +178,7 @@ class LoginScreen extends StatelessWidget {
             ],
           ),
           SizedBox(
-            height: h / 932 * 100,
+            height: h/designHeight * 100,
           )
         ],
       ),

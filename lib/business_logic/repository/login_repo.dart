@@ -1,6 +1,8 @@
 
 
 
+import 'dart:convert';
+
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:magdsoft_flutter_structure/data/data_providers/local/cache_helper.dart';
@@ -61,13 +63,14 @@ class AuthRepositoryImpl implements AuthRepository {
       print(otpResponse.toJson());
       if(otpResponse.status==200)
       {
-        CacheHelper.saveDataSharedPreference(key: "isLogin", value: true);
+        CacheHelper.saveDataSharedPreference(key: "accountModel", value: json.encode(otpResponse.account!.toJson()));
         return right(AccountModel.fromJson(otpResponse.account!.toJson()));
       }
       else {
         return left(Failure("error code ${otpResponse.status}", otpResponse.status??0));
       }
     } catch (e) {
+
       print(e.toString());
       return left(Failure(e.toString(), 0));
     }

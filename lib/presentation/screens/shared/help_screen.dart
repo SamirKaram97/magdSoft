@@ -10,6 +10,7 @@ import 'package:magdsoft_flutter_structure/presentation/screens/shared/otp_scree
 import 'package:magdsoft_flutter_structure/presentation/styles/colors.dart';
 import 'package:magdsoft_flutter_structure/presentation/view/AppButton.dart';
 
+import '../../../constants/constatnts.dart';
 import '../../../data/models/account_model.dart';
 import '../../view/AppCard.dart';
 
@@ -37,14 +38,14 @@ class _HelpScreenState extends State<HelpScreen> {
           children: [
             const BackGroundGraidentColor(),
             Padding(
-              padding:  EdgeInsets.only(left:w / 430 * 16,right: w / 430 * 16,top: w / 430 * 50,bottom: w / 430 * 20),
+              padding:  EdgeInsets.only(left:w / designWidth * 16,right: w / designWidth * 16,top: w / designWidth * 50,bottom: w / designWidth * 20),
               child: Column(
                 children: [
-                  Text("Help",style: GoogleFonts.inter(color: AppColor.white,fontWeight: FontWeight.w400,fontSize: w / 430 * 30),),
-                  Expanded(child: ListView.separated(itemBuilder: (context, index) =>AppCard(padding: EdgeInsets.all(w/430*13),child: _cardColumn(bloc.helpList!, index, w, bloc)) , separatorBuilder: (context, index) => SizedBox(height: h/932*27,), itemCount:bloc.helpList!.length)),
+                  Text("Help",style: GoogleFonts.inter(color: AppColor.white,fontWeight: FontWeight.w400,fontSize: w / designWidth * 30),),
+                  Expanded(child: ListView.separated(itemBuilder: (context, index) =>AppCard(padding: EdgeInsets.all(w/designWidth*13),child: _cardColumn(bloc.helpList!, index, w, bloc)) , separatorBuilder: (context, index) => SizedBox(height: h/932*27,), itemCount:bloc.helpList!.length)),
                   AppButton(onPressed: (){
                     Navigator.pushReplacementNamed(context, RouteNames.homeRoute,arguments: widget.accountModel);
-                  }, text: "Continue", height: w / 430 * 50)
+                  }, text: "Continue", height: w / designWidth * 50)
 
                 ],
               ),
@@ -69,7 +70,7 @@ class _HelpScreenState extends State<HelpScreen> {
             children: [
                 Row(
                   children: [
-                     Text(helpModelList[index].question??"",style: GoogleFonts.inter(color: AppColor.primaryBlue,fontSize: w / 430 * 17,fontWeight: FontWeight.w400),),
+                     Text(helpModelList[index].question??"",style: GoogleFonts.inter(color: AppColor.primaryBlue,fontSize: w / designWidth * 17,fontWeight: FontWeight.w400),),
                     const Spacer(),
                     IconButton(onPressed: () {
                      bloc.changeSelectedIndex(index);
@@ -78,7 +79,7 @@ class _HelpScreenState extends State<HelpScreen> {
                   ],
                 ),
                 Flex(direction: Axis.vertical,children: [
-                  if(index==bloc.selectedIndex)Text(helpModelList[index].answer??"",style: GoogleFonts.inter(fontSize: w / 430 * 17,fontWeight: FontWeight.w400))
+                  if(index==bloc.selectedIndex)Text(helpModelList[index].answer??"",style: GoogleFonts.inter(fontSize: w / designWidth * 17,fontWeight: FontWeight.w400))
                 ],)
             ],
           );
