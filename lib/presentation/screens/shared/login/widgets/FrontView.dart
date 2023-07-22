@@ -1,85 +1,32 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg_provider/flutter_svg_provider.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:magdsoft_flutter_structure/business_logic/login_bloc/events.dart';
-import 'package:magdsoft_flutter_structure/presentation/router/app_router.dart';
-import 'package:magdsoft_flutter_structure/presentation/styles/colors.dart';
-import 'package:magdsoft_flutter_structure/presentation/view/AppButton.dart';
 
-import '../../../business_logic/login_bloc/bloc.dart';
-import '../../../business_logic/login_bloc/states.dart';
-import '../../../constants/assets_manger.dart';
-import '../../../constants/constatnts.dart';
-import '../../../data/network/requests/login_request.dart';
-import '../../../di.dart';
-import '../../view/BackGraidentImage.dart';
-import '../../view/MyFormFiled.dart';
-import '../../view/social_button.dart';
-import '../../widget/toast.dart';
+import '../../../../../constants/constatnts.dart';
+import '../../../../styles/colors.dart';
+import '../../../../view/AppButton.dart';
+import '../../../../view/MyFormFiled.dart';
+import '../../../../view/social_button.dart';
 
-class LoginScreen extends StatelessWidget {
-  LoginScreen({Key? key}) : super(key: key);
-  final List<String> socialImages = [
-    ImagesPath.face,
-    ImagesPath.ios,
-    ImagesPath.google
-  ];
-  var nameController = TextEditingController();
-  var phoneController = TextEditingController();
-  var formKey = GlobalKey<FormState>();
-  var scafoldKey = GlobalKey<ScaffoldState>();
+class FrontView extends StatelessWidget {
+  const FrontView({
+    Key? key,
+    required this.formKey,
+    required this.nameController,
+    required this.phoneController,
+    required this.socialImages,
+    required this.onPressed,
+  }) : super(key: key);
 
-  loginClick(context)
-  {
-    if(formKey.currentState!.validate())
-    {
-
-      print("true");
-      BlocProvider.of<LoginBloc>(context).add(
-          LoginExecuteEvent(LoginRequest(
-              name: nameController.text,
-              phone: phoneController.text)));}
-    else{print("false");}
-  }
+  final GlobalKey<FormState> formKey;
+  final TextEditingController nameController;
+  final TextEditingController phoneController;
+  final List<String> socialImages;
+  final GestureTapCallback? onPressed;
 
   @override
   Widget build(BuildContext context) {
     double w = MediaQuery.of(context).size.width;
     double h = MediaQuery.of(context).size.height;
-
-    return BlocConsumer<LoginBloc, LoginState>(
-      listener: (context, state) {
-        if(state is LoginSuccessState)
-          {
-            showToast(text: state.message,state: ToastState.SUCCESS);
-
-             Navigator.pushNamed(context, RouteNames.otpRoute,arguments: phoneController.text);
-          }
-        else if(state is LoginErrorState)
-          {
-            showToast(text:state.message,state: ToastState.EROOR);
-          }
-
-      },
-      builder: (context, state) {
-        return Scaffold(
-          body: Stack(
-            children: [
-              const BackGraidentImage(),
-              _middleShape(h),
-              _frontView(w, h, context,(){
-                loginClick(context);
-              })
-            ],
-          ),
-        );
-      },
-    );
-  }
-
-  Align _frontView(double w, double h, context,GestureTapCallback? onPressed) {
     return Align(
       alignment: AlignmentDirectional.bottomCenter,
       child: Column(
@@ -112,7 +59,7 @@ class LoginScreen extends StatelessWidget {
                       height: h/designHeight * 3.13,
                       width: w / designWidth * 143,
                     ),
-                    Spacer(),
+                    const Spacer(),
                     MyFormFiled(
                         textInputType: TextInputType.name,
                         controller: nameController,
@@ -132,7 +79,7 @@ class LoginScreen extends StatelessWidget {
                         height: h/designHeight * 50,
                         text: "Login",
                         onPressed: onPressed),
-                    Spacer(),
+                    const Spacer(),
                   ],
                 ),
               ),
@@ -184,20 +131,4 @@ class LoginScreen extends StatelessWidget {
       ),
     );
   }
-
-  Align _middleShape(double h) {
-    return Align(
-        alignment: AlignmentDirectional.bottomCenter,
-        child: Container(
-          width: double.infinity,
-          height: h * .6,
-          decoration: const BoxDecoration(
-              color: AppColor.white,
-              borderRadius: BorderRadiusDirectional.only(
-                  topStart: Radius.circular(60), topEnd: Radius.circular(60))),
-        ));
-  }
-
 }
-
-

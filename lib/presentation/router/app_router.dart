@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:magdsoft_flutter_structure/data/models/account_model.dart';
 import 'package:magdsoft_flutter_structure/data/models/product_model.dart';
-import 'package:magdsoft_flutter_structure/presentation/screens/shared/login_screen.dart';
-import 'package:magdsoft_flutter_structure/presentation/screens/shared/proudect_screen.dart';
+import 'package:magdsoft_flutter_structure/presentation/screens/shared/login/login_screen.dart';
+import 'package:magdsoft_flutter_structure/presentation/screens/shared/product/proudect_screen.dart';
 
-import '../screens/shared/help_screen.dart';
-import '../screens/shared/home_scren.dart';
-import '../screens/shared/otp_screen.dart';
+import '../screens/shared/help/help_screen.dart';
+import '../screens/shared/home/home_scren.dart';
+import '../screens/shared/otp/otp_screen.dart';
 import '../screens/shared/splash_screen.dart';
 
 class AppRouter {

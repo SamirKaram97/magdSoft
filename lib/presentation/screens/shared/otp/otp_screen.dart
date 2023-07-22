@@ -5,13 +5,15 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:magdsoft_flutter_structure/business_logic/otp_bloc/bloc.dart';
 import 'package:magdsoft_flutter_structure/business_logic/otp_bloc/states.dart';
 import 'package:magdsoft_flutter_structure/data/network/requests/otp_request.dart';
+import 'package:magdsoft_flutter_structure/presentation/screens/shared/otp/widgets/OtpFormFiled.dart';
 import 'package:magdsoft_flutter_structure/presentation/styles/colors.dart';
 import 'package:magdsoft_flutter_structure/presentation/view/AppButton.dart';
 
-import '../../../business_logic/otp_bloc/events.dart';
-import '../../../constants/constatnts.dart';
-import '../../router/app_router.dart';
-import '../../widget/toast.dart';
+import '../../../../business_logic/otp_bloc/events.dart';
+import '../../../../constants/constatnts.dart';
+import '../../../router/app_router.dart';
+import '../../../view/BackGroundGraidentColor.dart';
+import '../../../widget/toast.dart';
 
 class OtpScreen extends StatefulWidget {
   const OtpScreen({Key? key, required this.phone}) : super(key: key);
@@ -51,7 +53,7 @@ class _OtpScreenState extends State<OtpScreen> {
       builder: (context, state) => Scaffold(
         body: Stack(
           children: [
-            BackGroundGraidentColor(),
+            const BackGroundGraidentColor(),
             _columnElements(h, w, context,widget.phone),
           ],
         ),
@@ -81,8 +83,7 @@ class _OtpScreenState extends State<OtpScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             for (int i = 0; i < 4; i++)
-              _otpFormFiled(controllers[i], h, w, context,
-                  isFirst: i == 0 ? true : false, isLast: i == 3 ? true : false,textInputType: TextInputType.number)
+              OtpFormFiled(controller: controllers[i], textInputType: TextInputType.number, isLast: i == 3 ? true : false, isFirst: i == 0 ? true : false)
           ],
         ),
         SizedBox(
@@ -109,69 +110,7 @@ class _OtpScreenState extends State<OtpScreen> {
     );
   }
 
-  Widget _otpFormFiled(TextEditingController controller, h, w, context,
-      {TextInputType? textInputType, bool? isLast, bool? isFirst}) {
-    return Padding(
-      padding: EdgeInsets.all(w / designWidth * 9.5),
-      child: Container(
-        width: w / designWidth * 70,
-        height: w / designWidth * 80,
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(w / designWidth * 15),
-            color: AppColor.white,
-            boxShadow: getBoxShadowApp(h)),
-        child: Center(
-          child: TextFormField(
-              controller: controller,
-              validator: (value) {
-                if (value != null && value.isEmpty) {
-                  return "please enter a value for this box";
-                }
-                return null;
-              },
-              textAlign: TextAlign.center,
-              keyboardType: textInputType,
-              onChanged: (value) {
-                if (value.isNotEmpty && isLast != true) {
-                  FocusScope.of(context).nextFocus();
-                } else if ((value.isEmpty && isFirst != true)) {
-                  FocusScope.of(context).previousFocus();
-                }
-              },
-              inputFormatters: [
-                LengthLimitingTextInputFormatter(1),
-              ],
-              decoration: InputDecoration(
-                  border: InputBorder.none,
-                  contentPadding: EdgeInsetsDirectional.all(w / designWidth * 9.5))),
-        ),
-      ),
-    );
-  }
 }
 
-class BackGroundGraidentColor extends StatelessWidget {
-  const BackGroundGraidentColor({
-    Key? key,
-  }) : super(key: key);
 
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Expanded(
-            child: Container(
-          decoration: BoxDecoration(
-              gradient: LinearGradient(
-                  colors: [
-                AppColor.primaryBlue.withOpacity(0.85),
-                AppColor.primaryBlue.withOpacity(0)
-              ],
-                  begin: AlignmentDirectional.topCenter,
-                  end: AlignmentDirectional.bottomCenter)),
-        )),
-        Expanded(child: Container())
-      ],
-    );
-  }
-}
+

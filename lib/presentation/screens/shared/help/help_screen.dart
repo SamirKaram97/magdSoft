@@ -6,13 +6,15 @@ import 'package:magdsoft_flutter_structure/business_logic/help_bloc/states.dart'
 import 'package:magdsoft_flutter_structure/data/data_providers/local/cache_helper.dart';
 import 'package:magdsoft_flutter_structure/data/models/HelpModel.dart';
 import 'package:magdsoft_flutter_structure/presentation/router/app_router.dart';
-import 'package:magdsoft_flutter_structure/presentation/screens/shared/otp_screen.dart';
+import 'package:magdsoft_flutter_structure/presentation/screens/shared/help/widgets/card_colun.dart';
+import 'package:magdsoft_flutter_structure/presentation/screens/shared/otp/otp_screen.dart';
 import 'package:magdsoft_flutter_structure/presentation/styles/colors.dart';
 import 'package:magdsoft_flutter_structure/presentation/view/AppButton.dart';
 
-import '../../../constants/constatnts.dart';
-import '../../../data/models/account_model.dart';
-import '../../view/AppCard.dart';
+import '../../../../constants/constatnts.dart';
+import '../../../../data/models/account_model.dart';
+import '../../../view/AppCard.dart';
+import '../../../view/BackGroundGraidentColor.dart';
 
 class HelpScreen extends StatefulWidget {
   HelpScreen({Key? key, required this.accountModel}) : super(key: key);
@@ -42,7 +44,7 @@ class _HelpScreenState extends State<HelpScreen> {
               child: Column(
                 children: [
                   Text("Help",style: GoogleFonts.inter(color: AppColor.white,fontWeight: FontWeight.w400,fontSize: w / designWidth * 30),),
-                  Expanded(child: ListView.separated(itemBuilder: (context, index) =>AppCard(padding: EdgeInsets.all(w/designWidth*13),child: _cardColumn(bloc.helpList!, index, w, bloc)) , separatorBuilder: (context, index) => SizedBox(height: h/932*27,), itemCount:bloc.helpList!.length)),
+                  Expanded(child: ListView.separated(itemBuilder: (context, index) =>AppCard(padding: EdgeInsets.all(w/designWidth*13),child: CardColumn(helpModelList: bloc.helpList!, index: index)) , separatorBuilder: (context, index) => SizedBox(height: h/932*27,), itemCount:bloc.helpList!.length)),
                   AppButton(onPressed: (){
                     Navigator.pushReplacementNamed(context, RouteNames.homeRoute,arguments: widget.accountModel);
                   }, text: "Continue", height: w / designWidth * 50)
@@ -61,28 +63,7 @@ class _HelpScreenState extends State<HelpScreen> {
 
     );
   }
-
-
-  Column _cardColumn(List<HelpModel> helpModelList, int index, double w, HelpBloc bloc) {
-    return Column(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-                Row(
-                  children: [
-                     Text(helpModelList[index].question??"",style: GoogleFonts.inter(color: AppColor.primaryBlue,fontSize: w / designWidth * 17,fontWeight: FontWeight.w400),),
-                    const Spacer(),
-                    IconButton(onPressed: () {
-                     bloc.changeSelectedIndex(index);
-
-                    }, icon:  Icon(index==bloc.selectedIndex?Icons.keyboard_arrow_up:Icons.keyboard_arrow_down)),
-                  ],
-                ),
-                Flex(direction: Axis.vertical,children: [
-                  if(index==bloc.selectedIndex)Text(helpModelList[index].answer??"",style: GoogleFonts.inter(fontSize: w / designWidth * 17,fontWeight: FontWeight.w400))
-                ],)
-            ],
-          );
-  }
 }
+
+
 
