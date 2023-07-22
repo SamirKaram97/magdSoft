@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:magdsoft_flutter_structure/constants/string_manger.dart';
 
 import '../../../../../constants/constatnts.dart';
 import '../../../../view/AppCard.dart';
@@ -32,7 +33,7 @@ class SearchRow extends StatelessWidget {
                       color: Colors.grey,
                     ),
                     border: InputBorder.none,
-                    hintText: "Search"),
+                    hintText: StringsManger.search),
               ),
             )),
             SizedBox(

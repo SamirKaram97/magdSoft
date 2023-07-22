@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:magdsoft_flutter_structure/business_logic/otp_bloc/bloc.dart';
 import 'package:magdsoft_flutter_structure/business_logic/otp_bloc/states.dart';
+import 'package:magdsoft_flutter_structure/constants/string_manger.dart';
 import 'package:magdsoft_flutter_structure/data/network/requests/otp_request.dart';
 import 'package:magdsoft_flutter_structure/presentation/screens/shared/otp/widgets/OtpFormFiled.dart';
 import 'package:magdsoft_flutter_structure/presentation/styles/colors.dart';
@@ -70,11 +71,8 @@ class _OtpScreenState extends State<OtpScreen> {
           height: h/designHeight * 62,
         ),
         Text(
-          "Verify Phone",
-          style: GoogleFonts.inter(
-              fontWeight: FontWeight.w400,
-              fontSize: h/designHeight * 30,
-              color: AppColor.white),
+          StringsManger.verifyPhone,
+          style:Theme.of(context).textTheme.bodyLarge!.copyWith(color: AppColor.white),
         ),
         SizedBox(
           height: h/designHeight * 138,
@@ -92,11 +90,8 @@ class _OtpScreenState extends State<OtpScreen> {
         InkWell(
             onTap: () {},
             child: Text(
-              "Resend code",
-              style: GoogleFonts.inter(
-                  color: AppColor.primaryBlue,
-                  fontSize: h/designHeight * 20,
-                  fontWeight: FontWeight.w400),
+             StringsManger.resendCode,
+              style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: AppColor.primaryBlue),
             )),
         SizedBox(height: h/designHeight * 78,),
         Padding(
@@ -104,7 +99,7 @@ class _OtpScreenState extends State<OtpScreen> {
           child: AppButton(onPressed: ()async{
             String code= controllers[0].text+controllers[1].text+controllers[2].text+controllers[3].text;
             BlocProvider.of<OtpBloc>(context).add(OtpExecuteEvent(OtpRequest(phone: phone,code: code)));
-          },height: h/designHeight * 60, text: "Verify"),
+          },height: h/designHeight * 60, text: StringsManger.verify),
         )
       ],
     );

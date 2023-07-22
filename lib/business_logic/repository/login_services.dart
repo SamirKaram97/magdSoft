@@ -16,13 +16,13 @@ import '../../data/network/requests/login_request.dart';
 import '../../data/network/requests/otp_request.dart';
 import '../../data/network/responses/login_response.dart';
 
-abstract class AuthRepository {
+abstract class AuthServices {
   Future<Either<Failure, String>> login(LoginRequest loginRequest);
   Future<Either<Failure, AccountModel>> verifyOtp(OtpRequest otpRequest);
 }
 
-class AuthRepositoryImpl implements AuthRepository {
-  AuthRepositoryImpl();
+class AuthServicesImpl implements AuthServices {
+  AuthServicesImpl();
 
   @override
   Future<Either<Failure, String>> login(LoginRequest loginRequest) async {

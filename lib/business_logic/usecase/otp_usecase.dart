@@ -3,16 +3,16 @@ import 'package:magdsoft_flutter_structure/data/models/account_model.dart';
 import 'package:magdsoft_flutter_structure/data/network/requests/otp_request.dart';
 
 import '../../data/network/faliure.dart';
-import '../repository/login_repo.dart';
+import '../repository/login_services.dart';
 
 class OtpUseCase
 {
-  final AuthRepository loginRepository;
+  final AuthServices authServices;
 
-  OtpUseCase(this.loginRepository);
+  OtpUseCase(this.authServices);
 
   Future<Either<Failure,AccountModel>> call(OtpRequest loginRequest) async
   {
-    return await loginRepository.verifyOtp(loginRequest);
+    return await authServices.verifyOtp(loginRequest);
   }
 }

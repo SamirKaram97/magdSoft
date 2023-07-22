@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:google_fonts/google_fonts.dart';
+
 import 'package:magdsoft_flutter_structure/business_logic/help_bloc/bloc.dart';
 import 'package:magdsoft_flutter_structure/business_logic/help_bloc/states.dart';
+import 'package:magdsoft_flutter_structure/constants/string_manger.dart';
 import 'package:magdsoft_flutter_structure/data/data_providers/local/cache_helper.dart';
 import 'package:magdsoft_flutter_structure/data/models/HelpModel.dart';
 import 'package:magdsoft_flutter_structure/presentation/router/app_router.dart';
@@ -43,11 +44,11 @@ class _HelpScreenState extends State<HelpScreen> {
               padding:  EdgeInsets.only(left:w / designWidth * 16,right: w / designWidth * 16,top: w / designWidth * 50,bottom: w / designWidth * 20),
               child: Column(
                 children: [
-                  Text("Help",style: GoogleFonts.inter(color: AppColor.white,fontWeight: FontWeight.w400,fontSize: w / designWidth * 30),),
+                  Text(StringsManger.help,style: Theme.of(context).textTheme.bodyLarge!.copyWith(color: AppColor.white),),
                   Expanded(child: ListView.separated(itemBuilder: (context, index) =>AppCard(padding: EdgeInsets.all(w/designWidth*13),child: CardColumn(helpModelList: bloc.helpList!, index: index)) , separatorBuilder: (context, index) => SizedBox(height: h/932*27,), itemCount:bloc.helpList!.length)),
                   AppButton(onPressed: (){
                     Navigator.pushReplacementNamed(context, RouteNames.homeRoute,arguments: widget.accountModel);
-                  }, text: "Continue", height: w / designWidth * 50)
+                  }, text: StringsManger.continueW, height: w / designWidth * 50)
 
                 ],
               ),
@@ -57,8 +58,9 @@ class _HelpScreenState extends State<HelpScreen> {
       );}
         else if(state is HelpLoadingState) {
           return const Scaffold(body: Center(child: CircularProgressIndicator(),),);
-        } else
-          return Scaffold(body: Center(child: Text("something went wrong"),),);
+        } else {
+          return const Scaffold(body: Center(child: Text(StringsManger.wentWrong),),);
+        }
       },
 
     );

@@ -52,9 +52,7 @@ class ProductWidget extends StatelessWidget {
                     children: [
                       Text(
                         productsList[index].company ?? "",
-                        style: GoogleFonts.inter(
-                            color: AppColor.primaryBlue,
-                            fontSize: w / designWidth * 18),
+                        style: Theme.of(context).textTheme.labelMedium!.copyWith(fontSize: w/designWidth*18),
                       ),
                       SizedBox(height: h / designHeight * 3),
                       Text(productsList[index].name ?? "",
@@ -82,7 +80,7 @@ class ProductWidget extends StatelessWidget {
                                     AppColor.primaryBlue.withOpacity(0.25)
                                   ]),
                             ),
-                            child: Icon(
+                            child: const Icon(
                               Icons.add,
                               color: Colors.white,
                             ),

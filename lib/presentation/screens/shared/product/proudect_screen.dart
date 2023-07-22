@@ -4,6 +4,7 @@ import 'package:flutter_svg_provider/flutter_svg_provider.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:magdsoft_flutter_structure/constants/assets_manger.dart';
 import 'package:magdsoft_flutter_structure/constants/constatnts.dart';
+import 'package:magdsoft_flutter_structure/constants/string_manger.dart';
 import 'package:magdsoft_flutter_structure/data/models/product_model.dart';
 import 'package:magdsoft_flutter_structure/presentation/screens/shared/otp/otp_screen.dart';
 import 'package:magdsoft_flutter_structure/presentation/screens/shared/product/widgets/BigPicImageContainer.dart';
@@ -26,7 +27,7 @@ class ProductScreen extends StatefulWidget {
 
 class _ProductScreenState extends State<ProductScreen> {
   int selectedIndex=0;
-  List<String> strings=["Overview","Spesification","Review"];
+  List<String> strings=[StringsManger.overview,StringsManger.spesification,StringsManger.review];
 
   @override
   Widget build(BuildContext context) {
@@ -43,9 +44,9 @@ class _ProductScreenState extends State<ProductScreen> {
       body: Stack(
         children: [
           const BackGroundGraidentColor(),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: w / designWidth * 33),
-            child: SingleChildScrollView(
+          SingleChildScrollView(
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: w / designWidth * 33),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -72,10 +73,7 @@ class _ProductScreenState extends State<ProductScreen> {
                   ),
                   Text(
                     widget.model.name ?? '',
-                    style: GoogleFonts.inter(
-                        color: AppColor.white,
-                        fontSize: w / designWidth * 25,
-                        fontWeight: FontWeight.w700),
+                    style: Theme.of(context).textTheme.displayMedium,
                   ),
                   SizedBox(
                     height: h / designHeight * 6,
@@ -109,7 +107,7 @@ class _ProductScreenState extends State<ProductScreen> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              "Price",
+                              StringsManger.price,
                               style: GoogleFonts.inter(
                                   fontSize: w / designWidth * 16,
                                   color: AppColor.grey),
@@ -161,7 +159,7 @@ class _ProductScreenState extends State<ProductScreen> {
                           },
                           child: Column(
                             mainAxisSize: MainAxisSize.min,
-                            children: [Text(strings[i]),if(selectedIndex==i)Container(height: 8,width: 8,decoration: BoxDecoration(gradient: LinearGradient(colors: [AppColor.primaryBlue,AppColor.primaryBlue.withOpacity(0)],begin: AlignmentDirectional.topStart,end: AlignmentDirectional.bottomEnd),shape: BoxShape.circle,))],
+                            children: [Text(strings[i],style: Theme.of(context).textTheme.displaySmall!.copyWith(fontSize: w/designWidth*18,color: i==selectedIndex?AppColor.black:null),),if(selectedIndex==i)Container(height: 8,width: 8,decoration: BoxDecoration(gradient: LinearGradient(colors: [AppColor.primaryBlue,AppColor.primaryBlue.withOpacity(0)],begin: AlignmentDirectional.topStart,end: AlignmentDirectional.bottomEnd),shape: BoxShape.circle,))],
                           ),
                         )
                     ],

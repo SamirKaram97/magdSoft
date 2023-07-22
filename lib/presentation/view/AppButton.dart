@@ -36,10 +36,7 @@ class AppButton extends StatelessWidget {
         child: InkWell(
             onTap: onPressed,
             child: Center(
-              child: Text(text,style: GoogleFonts.inter(
-                  color: AppColor.white,
-                  fontWeight: FontWeight.w400,
-                  fontSize: h/designHeight * 20),),
+              child: Text(text,style: Theme.of(context).textTheme.bodyMedium,),
             )),
       ),
     );

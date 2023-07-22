@@ -42,24 +42,20 @@ class CategoryItemListWidget extends StatelessWidget {
           children: [
             Container(
                 clipBehavior: Clip.antiAliasWithSaveLayer,
-                child: Image(
-                    image: AssetImage(
-                  ItemModel.imagePath,
-                )),
                 width: w / designWidth * 40,
                 height: w / designWidth * 40,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(h / designHeight * 40),
                   boxShadow: getBoxShadowApp(h),
                   color: AppColor.white,
-                )),
+                ),
+                child: Image(
+                    image: AssetImage(
+                  ItemModel.imagePath,
+                ))),
             Text(
               ItemModel.title,
-              style: GoogleFonts.inter(
-                  color: cubit.selectedIndex == index
-                      ? AppColor.white
-                      : Colors.black,
-                  fontSize: w / designWidth * 22),
+              style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: w/designWidth*22),
             )
           ],
         ),

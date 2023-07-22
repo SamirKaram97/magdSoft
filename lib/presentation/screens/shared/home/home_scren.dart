@@ -3,24 +3,18 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:flutter_svg_provider/flutter_svg_provider.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:magdsoft_flutter_structure/business_logic/home_bloc/bloc.dart';
 import 'package:magdsoft_flutter_structure/business_logic/home_bloc/states.dart';
+import 'package:magdsoft_flutter_structure/constants/string_manger.dart';
 import 'package:magdsoft_flutter_structure/data/models/account_model.dart';
-import 'package:magdsoft_flutter_structure/data/models/product_model.dart';
-import 'package:magdsoft_flutter_structure/presentation/router/app_router.dart';
-import 'package:magdsoft_flutter_structure/presentation/screens/shared/help/help_screen.dart';
+
 import 'package:magdsoft_flutter_structure/presentation/screens/shared/home/widgets/ProductWidget.dart';
 import 'package:magdsoft_flutter_structure/presentation/screens/shared/home/widgets/SearchRow.dart';
-import 'package:magdsoft_flutter_structure/presentation/screens/shared/otp/otp_screen.dart';
-import 'package:magdsoft_flutter_structure/presentation/styles/colors.dart';
-import 'package:magdsoft_flutter_structure/presentation/view/MyFormFiled.dart';
 import 'package:magdsoft_flutter_structure/presentation/widget/toast.dart';
 
 import '../../../../constants/assets_manger.dart';
 import '../../../../constants/constatnts.dart';
-import '../../../view/AppCard.dart';
 import '../../../view/BackGroundGraidentColor.dart';
 import 'widgets/CategoryItemListWidget.dart';
 
@@ -30,9 +24,9 @@ class HomeScreen extends StatelessWidget {
   final List<String> brandsList = [ImagesPath.banner1, ImagesPath.banner2];
   int selectedIndex = 0;
   List<CategoryItemDataModel> categoryList = [
-    CategoryItemDataModel(ImagesPath.cup, "All"),
-    CategoryItemDataModel(ImagesPath.acer, "Acer"),
-    CategoryItemDataModel(ImagesPath.razer, "Razer"),
+    CategoryItemDataModel(ImagesPath.cup, StringsManger.all),
+    CategoryItemDataModel(ImagesPath.acer, StringsManger.acer),
+    CategoryItemDataModel(ImagesPath.razer, StringsManger.razer),
   ];
 
 
@@ -44,7 +38,7 @@ class HomeScreen extends StatelessWidget {
     return BlocConsumer<ProductsBloc, ProductsState>(
       listener: (context, state) {
         if (state is ProductsAddtoFavState) {
-          showToast(state: ToastState.SUCCESS, text: "Item added successfully");
+          showToast(state: ToastState.SUCCESS, text: StringsManger.itemAdded);
         }
       },
       builder: (context, state) {
@@ -82,9 +76,9 @@ class HomeScreen extends StatelessWidget {
                                 enableInfiniteScroll: true,
                                 reverse: false,
                                 autoPlay: true,
-                                autoPlayInterval: Duration(seconds: 5),
+                                autoPlayInterval: const Duration(seconds: 5),
                                 autoPlayAnimationDuration:
-                                    Duration(milliseconds: 800),
+                                    const Duration(milliseconds: 800),
                                 autoPlayCurve: Curves.fastOutSlowIn,
                                 enlargeCenterPage: true,
                                 enlargeFactor: 0.3,
@@ -118,12 +112,10 @@ class HomeScreen extends StatelessWidget {
                             crossAxisSpacing: w / designWidth * 2,
                             itemBuilder: (context, index) {
                               var list=bloc.selectedIndex==1?bloc.acer!:bloc.selectedIndex==2?bloc.razer!:bloc.productsList!;
-                              print(list.length);
                               return index == 0
                                 ? Text(
-                                    "Recommended for You",
-                                    style: GoogleFonts.inter(
-                                        fontSize: w / designWidth * 30),
+                                    StringsManger.recommended,
+                                    style: Theme.of(context).textTheme.bodyLarge,
                                   )
                                 : ProductWidget(index: index-1, productsList: list);
                             },
@@ -133,25 +125,10 @@ class HomeScreen extends StatelessWidget {
                     ),
                   ],
                 ),
-                floatingActionButton: FloatingActionButton(
-                    onPressed: () {}, child: Icon(Icons.home)),
+                floatingActionButton: _floatingActionButton(),
                 floatingActionButtonLocation:
                     FloatingActionButtonLocation.centerDocked,
-                bottomNavigationBar: AnimatedBottomNavigationBar(
-                  icons: const [
-                    Icons.logout_outlined,
-                    Icons.favorite,
-                    Icons.notification_add,
-                    Icons.settings
-                  ],
-                  activeIndex: selectedIndex,
-                  gapLocation: GapLocation.center,
-                  notchSmoothness: NotchSmoothness.verySmoothEdge,
-                  leftCornerRadius: 32,
-                  rightCornerRadius: 32,
-                  onTap: (index) {},
-                  //other params
-                ),
+                bottomNavigationBar: _bottomNavigationBar(),
                 //other params
               )
             : const Scaffold(
@@ -159,6 +136,28 @@ class HomeScreen extends StatelessWidget {
               );
       },
     );
+  }
+
+  AnimatedBottomNavigationBar _bottomNavigationBar() {
+    return AnimatedBottomNavigationBar(
+                icons:  const[
+                  Icons.logout_outlined,
+                  Icons.favorite,
+                  Icons.notification_add,
+                  Icons.settings
+                ],
+                activeIndex: selectedIndex,
+                gapLocation: GapLocation.center,
+                notchSmoothness: NotchSmoothness.verySmoothEdge,
+                leftCornerRadius: 32,
+                rightCornerRadius: 32,
+                onTap: (index) {},
+                //other params
+              );
+  }
+  FloatingActionButton _floatingActionButton() {
+    return FloatingActionButton(
+                  onPressed: () {}, child: const Icon(Icons.home));
   }
 }
 

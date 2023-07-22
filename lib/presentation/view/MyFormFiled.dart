@@ -2,6 +2,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:magdsoft_flutter_structure/constants/string_manger.dart';
 
 import '../../constants/constatnts.dart';
 import '../styles/colors.dart';
@@ -31,12 +32,13 @@ class MyFormFiled extends StatelessWidget {
         validator: (value) {
           if(value!=null&&value.isEmpty)
             {
-              return "please enter a value for this box";
+              return StringsManger.validate;
             }
           return null;
         },
           keyboardType: textInputType,
           decoration: InputDecoration(
+            hintStyle: Theme.of(context).textTheme.displaySmall,
               border: InputBorder.none,
               hintText: hint,
               contentPadding:

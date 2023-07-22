@@ -16,6 +16,7 @@ import 'package:magdsoft_flutter_structure/data/data_providers/local/cache_helpe
 import 'package:magdsoft_flutter_structure/data/data_providers/remote/dio_helper.dart';
 import 'package:magdsoft_flutter_structure/presentation/router/app_router.dart';
 import 'package:magdsoft_flutter_structure/presentation/styles/colors.dart';
+import 'package:magdsoft_flutter_structure/presentation/styles/theme.dart';
 import 'package:magdsoft_flutter_structure/presentation/widget/toast.dart';
 import 'package:sizer/sizer.dart';
 import 'package:intl/intl.dart';
@@ -106,25 +107,7 @@ class _MyAppState extends State<MyApp> {
                       locale: delegate.currentLocale,
                       supportedLocales: delegate.supportedLocales,
                       onGenerateRoute: AppRouter.onGenerateRoute,
-                      theme: ThemeData(
-                          appBarTheme: const AppBarTheme(
-                            elevation: 0.0,
-                            systemOverlayStyle: SystemUiOverlayStyle(
-                              //statusBarColor: AppColors.transparent,
-                              statusBarIconBrightness: Brightness.dark,
-                            ),
-                          ),
-                          elevatedButtonTheme: ElevatedButtonThemeData(
-                            style: ElevatedButton.styleFrom(
-                              fixedSize: Size(double.infinity,
-                                  MediaQuery.sizeOf(context).height * .05),
-                              textStyle:
-                                  TextStyle(color: AppColor.white, fontSize: 8),
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(8)),
-                              //scaffoldBackgroundColor: AppColors.white,
-                            ),
-                          )));
+                      theme: getAppTheme(context));
                 }),
               );
             },

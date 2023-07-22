@@ -11,13 +11,13 @@ import '../../data/data_providers/local/cache_helper.dart';
 import '../../data/data_providers/remote/dio_helper.dart';
 import '../../data/network/faliure.dart';
 
-abstract class DataRepository
+abstract class DataServices
 {
   Future<Either<Failure, List<HelpModel>>> getHelp();
   Future<Either<Failure, List<ProductModel>>> getProducts();
 }
 
-class DataRepositoryImpl implements DataRepository
+class DataServicesImpl implements DataServices
 {
   @override
   Future<Either<Failure, List<HelpModel>>> getHelp()async {

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:google_fonts/google_fonts.dart';
 
+
+
+import 'package:google_fonts/google_fonts.dart';
 import '../../../../../business_logic/help_bloc/bloc.dart';
 import '../../../../../constants/constatnts.dart';
 import '../../../../../data/models/HelpModel.dart';
@@ -28,7 +30,7 @@ class CardColumn extends StatelessWidget {
       children: [
         Row(
           children: [
-            Text(helpModelList[index].question??"",style: GoogleFonts.inter(color: AppColor.primaryBlue,fontSize: w / designWidth * 17,fontWeight: FontWeight.w400),),
+            Text(helpModelList[index].question??"",style: Theme.of(context).textTheme.labelMedium),
             const Spacer(),
             IconButton(onPressed: () {
               bloc.changeSelectedIndex(index);
