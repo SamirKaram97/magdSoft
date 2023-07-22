@@ -82,7 +82,7 @@ class _OtpScreenState extends State<OtpScreen> {
           children: [
             for (int i = 0; i < 4; i++)
               _otpFormFiled(controllers[i], h, w, context,
-                  isFirst: i == 0 ? true : false, isLast: i == 3 ? true : false)
+                  isFirst: i == 0 ? true : false, isLast: i == 3 ? true : false,textInputType: TextInputType.number)
           ],
         ),
         SizedBox(

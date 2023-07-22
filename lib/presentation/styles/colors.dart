@@ -7,6 +7,7 @@ class AppColor{
   static const Color white = Color(0xFFFFFFFF);
 
   static const Color shadowColor = Color(0xFF00000040);
+  static const Color grey = Color(0xFFB1B1B1);
   static const Color red = Colors.red;
 }
  getBoxShadowApp(double h)=>[BoxShadow(
