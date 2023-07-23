@@ -74,16 +74,16 @@ class _FrontViewState extends State<FrontView> {
             children: [
               Container(
                 width: w / designWidth * 372,
-                height: h/designHeight * 345,
                 decoration: BoxDecoration(
                     color: AppColor.white,
                     borderRadius: BorderRadius.circular(w / designWidth * 40),
                     boxShadow: getBoxShadowApp(h)),
                 child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: w / designWidth * 25),
+                  padding: EdgeInsets.symmetric(horizontal: w / designWidth * 25,vertical:h / designHeight * 25),
                   child: Form(
                     key: formKey,
                     child: Column(
+                      mainAxisSize: MainAxisSize.min,
                       children: [
                         SizedBox(
                           height: h/designHeight * 27,
@@ -98,7 +98,9 @@ class _FrontViewState extends State<FrontView> {
                           height: h/designHeight * 3.13,
                           width: w / designWidth * 143,
                         ),
-                        const Spacer(),
+                        SizedBox(
+                          height: h/designHeight * 27,
+                        ),
                         MyFormFiled(
                             textInputType: TextInputType.name,
                             controller: nameController,
@@ -120,7 +122,6 @@ class _FrontViewState extends State<FrontView> {
                             onPressed: (){
                               loginClick(context);
                             }),
-                        const Spacer(),
                       ],
                     ),
                   ),

@@ -11,6 +11,8 @@ import '../../../../../constants/string_manger.dart';
 import '../../../../../data/models/product_model.dart';
 import '../../../../router/app_router.dart';
 import '../../../../styles/colors.dart';
+import 'ImageBox.dart';
+import 'TypeAndPriceBox.dart';
 
 class ProductWidget extends StatelessWidget {
   const ProductWidget({
@@ -33,117 +35,25 @@ class ProductWidget extends StatelessWidget {
           Navigator.pushNamed(context, RouteNames.productRoute,arguments: productsList[index]);
         },
         child: Container(
-            width: w / designWidth * 168,
-            height: h / designHeight * 239,
-            child: Stack(children: [
-              Container(
-                width: w / designWidth * 168,
-                height: h / designHeight * 239,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(
-                    w / designWidth * 20,
-                  ),
-                  boxShadow: getBoxShadowApp(h),
-                  color: AppColor.white,
-                ),
-                child: Padding(
-                  padding: EdgeInsets.only(left: w / designWidth * 9),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        productsList[index].company ?? "",
-                        style: Theme.of(context).textTheme.labelMedium!.copyWith(fontSize: w/designWidth*18),
-                      ),
-                      SizedBox(height: h / designHeight * 3),
-                      Text(productsList[index].name ?? "",
-                          style: Theme.of(context).textTheme.bodyLarge!.copyWith(fontSize: 12)),
-                      SizedBox(height: h / designHeight * 8),
-                      Row(
-                        children: [
-                          Text((productsList[index].price??"")+" ${StringsManger.egp}",style:Theme.of(context).textTheme.displaySmall!.copyWith(color: AppColor.black),),
-                          const Spacer(),
-                          Container(
-                            width: w / designWidth * 40,
-                            height: h / designHeight * 40,
-                            decoration: BoxDecoration(
-                              borderRadius: const BorderRadius.only(
-                                topLeft: Radius.circular(20),
-                                bottomRight: Radius.circular(20),
-                              ),
-                              gradient: LinearGradient(
-                                  begin: AlignmentDirectional.topStart,
-                                  end: AlignmentDirectional.bottomEnd,
-                                  colors: [
-                                    AppColor.primaryBlue,
-                                    AppColor.primaryBlue.withOpacity(0.25)
-                                  ]),
-                            ),
-                            child: const Icon(
-                              Icons.add,
-                              color: Colors.white,
-                            ),
-                          )
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              Stack(
-                children: [
-                  Container(
-                      width: w / designWidth * 168,
-                      height: h / designHeight * 142,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(
-                          w / designWidth * 20,
-                        ),
-                        boxShadow: getBoxShadowApp(h),
-                        color: AppColor.white,
-                      ),
-                      child: Stack(
-                        children: [
-                          Padding(
-                            padding: EdgeInsets.all(w / designWidth * 5),
-                            child: Center(
-                              child: CachedNetworkImage(
-                                imageUrl: productsList[index].image ?? "",
-                                progressIndicatorBuilder: (context, url, downloadProgress) =>
-                                    CircularProgressIndicator(value: downloadProgress.progress),
-                                errorWidget: (context, url, error) =>Icon(Icons.error),
-                              ),
-                            ),
-                          ),
-                          Align(
-                            alignment: AlignmentDirectional.topEnd,
-                            child: InkWell(
-                              onTap: () async {
-                                await BlocProvider.of<ProductsBloc>(context)
-                                    .addToFav(productsList[index].id!);
-                              },
-                              child: Padding(
-                                padding: EdgeInsets.all(h / designHeight * 10),
-                                child: Image(
-                                  width: h / designHeight * 20,
-                                  height: h / designHeight * 20,
-                                  image: Svg(
-                                      BlocProvider.of<ProductsBloc>(context)
-                                              .favList
-                                              .contains(productsList[index].id!)
-                                          ? ImagesPath.fav_red
-                                          : ImagesPath.fav),
-                                ),
-                              ),
-                            ),
-                          )
-                        ],
-                      )),
-                ],
-              ),
-            ])),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(
+              w / designWidth * 20,
+            ),
+            boxShadow: getBoxShadowApp(h),
+            color: AppColor.white,
+          ),
+          child: Column(
+            children: [
+              ImageBox( productsList: productsList, index: index),
+              SizedBox(height: h/designHeight*5,),
+              TypeAndPriceBox(productsList: productsList, index: index),
+            ],
+          ),
+        ),
       ),
     );
   }
 }
+
+
+
