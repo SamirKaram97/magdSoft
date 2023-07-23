@@ -15,19 +15,28 @@ import '../../../../view/MyFormFiled.dart';
 import '../../../../view/social_button.dart';
 import '../../../../widget/toast.dart';
 
-class FrontView extends StatelessWidget {
+class FrontView extends StatefulWidget {
    FrontView({
     Key? key,
 
   }) : super(key: key);
+
+  @override
+  State<FrontView> createState() => _FrontViewState();
+}
+
+class _FrontViewState extends State<FrontView> {
   final List<String> socialImages = [
     ImagesPath.face,
     ImagesPath.ios,
     ImagesPath.google
   ];
+
   var nameController = TextEditingController();
+
   var phoneController = TextEditingController();
-   var formKey = GlobalKey<FormState>();
+
+  static final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   loginClick(context)
   {

@@ -15,10 +15,19 @@ class LoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(
+        alignment: AlignmentDirectional.bottomCenter,
         children: [
           const BackGraidentImage(),
-          const MiddleShape(),
-          FrontView()
+          SingleChildScrollView(
+            child: Stack(
+              alignment: AlignmentDirectional.bottomCenter,
+              children: [
+                const MiddleShape(),
+                FrontView()
+              ],
+            ),
+          )
+
         ],
       ),
     );
