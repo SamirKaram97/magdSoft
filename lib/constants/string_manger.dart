@@ -22,5 +22,9 @@ class StringsManger
   static const spesification="Spesification";
   static const review="Review";
   static const price="Price";
+  static const officialStore="Official Store";
+  static const viewStore="View Store";
+  static const addToCart="Add To Cart";
+  static const egp="EGP";
 
 }

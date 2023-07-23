@@ -3,7 +3,6 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:magdsoft_flutter_structure/business_logic/home_bloc/bloc.dart';
 import 'package:magdsoft_flutter_structure/business_logic/home_bloc/states.dart';
 import 'package:magdsoft_flutter_structure/constants/string_manger.dart';

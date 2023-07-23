@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:magdsoft_flutter_structure/constants/string_manger.dart';
 
 import '../../../../../business_logic/login_bloc/bloc.dart';
@@ -135,7 +134,7 @@ class FrontView extends StatelessWidget {
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: w * 10 / designWidth),
                     child: Text(StringsManger.or,
-                        style: GoogleFonts.inter(color: AppColor.primaryBlue)),
+                        style: Theme.of(context).textTheme.titleSmall),
                   ),
                   Expanded(
                     child: Padding(

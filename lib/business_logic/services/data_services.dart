@@ -10,6 +10,7 @@ import 'package:magdsoft_flutter_structure/data/network/responses/products_respo
 import '../../data/data_providers/local/cache_helper.dart';
 import '../../data/data_providers/remote/dio_helper.dart';
 import '../../data/network/faliure.dart';
+import '../../data/network/network_info.dart';
 
 abstract class DataServices
 {
@@ -19,6 +20,10 @@ abstract class DataServices
 
 class DataServicesImpl implements DataServices
 {
+  final NetworkInfo networkInfo;
+
+  DataServicesImpl(this.networkInfo);
+  
   @override
   Future<Either<Failure, List<HelpModel>>> getHelp()async {
     try {
@@ -46,7 +51,9 @@ class DataServicesImpl implements DataServices
 
   @override
   Future<Either<Failure, List<ProductModel>>> getProducts()async {
-
+    bool network=await networkInfo.isNetworkConnectionWork();
+    if(network)
+      {
     try {
       var responseData = await DioHelper.getData(
           query: {},
@@ -58,7 +65,7 @@ class DataServicesImpl implements DataServices
       if(productsResponse.status==200)
       {
         List<ProductModel> list=productsResponse.products?.map((e) => ProductModel.fromJson(e.toJson())).toList()??[];
-        //CacheHelper.saveDataSharedPreference(key: "products", value: json.encode(list));
+        CacheHelper.saveDataSharedPreference(key: "products", value: ProductModel.encode(list));
         return right(list);
       }
       else {
@@ -70,5 +77,19 @@ class DataServicesImpl implements DataServices
     }
 
   }
+    else
+      {
+        String? products=CacheHelper.getDataFromSharedPreference(key: "products");
+        if(products!=null)
+          {
+            return right(ProductModel.decode(products));
+          }
+        else
+          {
+            return left(Failure("No data", 0));
+          }
+      }
+  }
+
 
 }

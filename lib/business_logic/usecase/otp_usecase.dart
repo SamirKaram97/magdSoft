@@ -3,7 +3,7 @@ import 'package:magdsoft_flutter_structure/data/models/account_model.dart';
 import 'package:magdsoft_flutter_structure/data/network/requests/otp_request.dart';
 
 import '../../data/network/faliure.dart';
-import '../repository/login_services.dart';
+import '../services/login_services.dart';
 
 class OtpUseCase
 {

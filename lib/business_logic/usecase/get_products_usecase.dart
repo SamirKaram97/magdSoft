@@ -1,9 +1,9 @@
 import 'package:dartz/dartz.dart';
-import 'package:magdsoft_flutter_structure/business_logic/repository/data_services.dart';
 
 
 import '../../data/models/product_model.dart';
 import '../../data/network/faliure.dart';
+import '../services/data_services.dart';
 
 class GetProductUseCase
 {

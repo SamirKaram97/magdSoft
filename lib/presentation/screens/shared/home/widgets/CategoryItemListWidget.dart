@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:google_fonts/google_fonts.dart';
-
 import '../../../../../business_logic/home_bloc/bloc.dart';
 import '../../../../../constants/constatnts.dart';
 import '../../../../styles/colors.dart';
@@ -55,7 +53,9 @@ class CategoryItemListWidget extends StatelessWidget {
                 ))),
             Text(
               ItemModel.title,
-              style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: w/designWidth*22),
+              style: cubit.selectedIndex == index
+                  ?  Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: w/designWidth*22)
+                  :Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: w/designWidth*22,color: AppColor.black),
             )
           ],
         ),

@@ -1,11 +1,13 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg_provider/flutter_svg_provider.dart';
-import 'package:google_fonts/google_fonts.dart';
+
 
 import '../../../../../business_logic/home_bloc/bloc.dart';
 import '../../../../../constants/assets_manger.dart';
 import '../../../../../constants/constatnts.dart';
+import '../../../../../constants/string_manger.dart';
 import '../../../../../data/models/product_model.dart';
 import '../../../../router/app_router.dart';
 import '../../../../styles/colors.dart';
@@ -56,13 +58,11 @@ class ProductWidget extends StatelessWidget {
                       ),
                       SizedBox(height: h / designHeight * 3),
                       Text(productsList[index].name ?? "",
-                          style: GoogleFonts.inter(
-                              color: Colors.black,
-                              fontSize: w / designWidth * 12)),
+                          style: Theme.of(context).textTheme.bodyLarge!.copyWith(fontSize: 12)),
                       SizedBox(height: h / designHeight * 8),
                       Row(
                         children: [
-                          Text(productsList[index].price ?? ""),
+                          Text((productsList[index].price??"")+" ${StringsManger.egp}",style:Theme.of(context).textTheme.displaySmall!.copyWith(color: AppColor.black),),
                           const Spacer(),
                           Container(
                             width: w / designWidth * 40,
@@ -107,10 +107,13 @@ class ProductWidget extends StatelessWidget {
                         children: [
                           Padding(
                             padding: EdgeInsets.all(w / designWidth * 5),
-                            child: Image(
-                              image:
-                                  NetworkImage(productsList[index].image ?? ""),
-                              fit: BoxFit.cover,
+                            child: Center(
+                              child: CachedNetworkImage(
+                                imageUrl: productsList[index].image ?? "",
+                                progressIndicatorBuilder: (context, url, downloadProgress) =>
+                                    CircularProgressIndicator(value: downloadProgress.progress),
+                                errorWidget: (context, url, error) =>Icon(Icons.error),
+                              ),
                             ),
                           ),
                           Align(

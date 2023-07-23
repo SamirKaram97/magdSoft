@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-
-
-import 'package:google_fonts/google_fonts.dart';
 import '../../../../../business_logic/help_bloc/bloc.dart';
 import '../../../../../constants/constatnts.dart';
 import '../../../../../data/models/HelpModel.dart';
@@ -39,7 +35,7 @@ class CardColumn extends StatelessWidget {
           ],
         ),
         Flex(direction: Axis.vertical,children: [
-          if(index==bloc.selectedIndex)Text(helpModelList[index].answer??"",style: GoogleFonts.inter(fontSize: w / designWidth * 17,fontWeight: FontWeight.w400))
+          if(index==bloc.selectedIndex)Text(helpModelList[index].answer??"",style: Theme.of(context).textTheme.labelMedium!.copyWith(color: AppColor.black))
         ],)
       ],
     );

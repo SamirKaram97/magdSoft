@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:magdsoft_flutter_structure/constants/string_manger.dart';
+
 
 import '../../../../../business_logic/home_bloc/bloc.dart';
 import '../../../../../constants/assets_manger.dart';
@@ -10,8 +11,8 @@ import '../../../../../data/models/product_model.dart';
 import '../../../../styles/colors.dart';
 import '../../../../view/AppContainer.dart';
 import '../proudect_screen.dart';
-class StoryInfoRow extends StatelessWidget {
-  const StoryInfoRow({
+class StoreInfoRow extends StatelessWidget {
+  const StoreInfoRow({
     Key? key, required this.model,
   }) : super(key: key);
 
@@ -53,13 +54,12 @@ class StoryInfoRow extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    model.company ?? "" + "Offical Store",
-                    style: GoogleFonts.inter(fontSize: w / designWidth * 17),
+                    model.company??""+StringsManger.officialStore,
+                    style: Theme.of(context).textTheme.labelMedium!.copyWith(color: AppColor.black),
                   ),
                   Text(
-                    "View Store",
-                    style: GoogleFonts.inter(
-                        fontSize: w / designWidth * 12, color: AppColor.grey),
+                    StringsManger.viewStore,
+                    style: Theme.of(context).textTheme.displaySmall!.copyWith(fontSize: w/designWidth*12),
                   ),
                 ],
               ),

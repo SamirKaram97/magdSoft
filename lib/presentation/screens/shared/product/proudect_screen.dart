@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg_provider/flutter_svg_provider.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:magdsoft_flutter_structure/constants/assets_manger.dart';
 import 'package:magdsoft_flutter_structure/constants/constatnts.dart';
 import 'package:magdsoft_flutter_structure/constants/string_manger.dart';
@@ -80,10 +79,7 @@ class _ProductScreenState extends State<ProductScreen> {
                   ),
                   Text(
                     "Type: ${widget.model.type ?? ''}",
-                    style: GoogleFonts.inter(
-                        color: AppColor.white,
-                        fontSize: w / designWidth * 15,
-                        fontWeight: FontWeight.w400),
+                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: w/designWidth*15),
                   ),
                   SizedBox(
                     height: h / designHeight * 16,
@@ -96,7 +92,7 @@ class _ProductScreenState extends State<ProductScreen> {
                   SizedBox(
                     height: h / designHeight * 16,
                   ),
-                  StoryInfoRow(model: widget.model),
+                  StoreInfoRow(model: widget.model),
                   SizedBox(height: h / designHeight * 25),
                   Row (
                     mainAxisAlignment: MainAxisAlignment.start,
@@ -108,17 +104,14 @@ class _ProductScreenState extends State<ProductScreen> {
                           children: [
                             Text(
                               StringsManger.price,
-                              style: GoogleFonts.inter(
-                                  fontSize: w / designWidth * 16,
-                                  color: AppColor.grey),
+                                style: Theme.of(context).textTheme.displaySmall!.copyWith(fontSize: w/designWidth*16),
                             ),
                             SizedBox(
                               height: h / designHeight * 7,
                             ),
                             Text(
-                              "${widget.model.price ?? ""} EGP",
-                              style: GoogleFonts.inter(
-                                  fontSize: w / designWidth * 18),
+                              "${widget.model.price ?? ""} ${StringsManger.egp}",
+                              style: Theme.of(context).textTheme.bodyLarge!.copyWith(fontSize: w/designWidth*18),
                             )
                           ],
                         ),
@@ -138,7 +131,7 @@ class _ProductScreenState extends State<ProductScreen> {
                                     AppColor.primaryBlue,
                                     AppColor.primaryBlue.withOpacity(0)
                                   ]),
-                            child: Center(child: Text("Add To Cart",style: GoogleFonts.inter(color: AppColor.white,fontSize: w/designWidth*17),)),
+                            child: Center(child: Text(StringsManger.addToCart,style:Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: w/designWidth*17),)),
                           ))
                     ],
                   ),
@@ -165,7 +158,7 @@ class _ProductScreenState extends State<ProductScreen> {
                     ],
                   ),
                   SizedBox(height: h/designHeight*35,),
-                  Text(widget.model.description??"",style: GoogleFonts.inter(color: AppColor.grey,fontSize: w/designWidth*16),)
+                  Text(widget.model.description??"",style: Theme.of(context).textTheme.bodySmall,)
                 ],
               ),
             ),

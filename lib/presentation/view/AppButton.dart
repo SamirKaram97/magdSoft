@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-
-import '../../constants/constatnts.dart';
 import '../styles/colors.dart';
 
 class AppButton extends StatelessWidget {
@@ -19,8 +16,6 @@ class AppButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double w = MediaQuery.of(context).size.width;
-    double h = MediaQuery.of(context).size.height;
 
     return Container(
       width: double.infinity,
@@ -29,8 +24,7 @@ class AppButton extends StatelessWidget {
         AppColor.primaryBlue,
         AppColor.primaryBlue.withOpacity(0.7),
         AppColor.primaryBlue.withOpacity(0.25)
-      ]), boxShadow: [
-      ]),
+      ]), boxShadow: const []),
       child: Material(
         color: Colors.transparent,
         child: InkWell(
