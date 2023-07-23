@@ -22,8 +22,8 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     Future.delayed(const Duration(seconds: 3)).then((value)async {
-      Navigator.pushReplacementNamed(context, RouteNames.loginRoute);
-      /*
+
+
       String? accountModelString=await CacheHelper.getDataFromSharedPreference(key: "accountModel");
       print(accountModelString);
       if(accountModelString==null) {
@@ -32,7 +32,7 @@ class _SplashScreenState extends State<SplashScreen> {
       else
         {
           Navigator.pushReplacementNamed(context, RouteNames.homeRoute,arguments: AccountModel.fromJson(json.decode(accountModelString)));
-        }*/
+        }
     });
     super.initState();
   }
