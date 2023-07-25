@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 Future<bool?> showToast({required ToastState state, required String text}) =>
@@ -6,10 +7,10 @@ Future<bool?> showToast({required ToastState state, required String text}) =>
         msg: text,
         toastLength: Toast.LENGTH_LONG,
         gravity: ToastGravity.BOTTOM,
-        timeInSecForIosWeb: 5,
+        timeInSecForIosWeb: 3,
         backgroundColor: color(state),
         textColor: Colors.white,
-        fontSize: 16.0);
+        fontSize: 16.0.sp);
 
 enum ToastState { WARNING, EROOR, SUCCESS }
 

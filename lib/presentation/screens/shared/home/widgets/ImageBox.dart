@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg_provider/flutter_svg_provider.dart';
+import 'package:magdsoft_flutter_structure/presentation/responsive.dart';
 
 import '../../../../../business_logic/home_bloc/bloc.dart';
 import '../../../../../constants/assets_manger.dart';
@@ -15,33 +16,34 @@ class ImageBox extends StatelessWidget {
     required this.productsList,
     required this.index,
   }) : super(key: key);
-  
+
   final List<ProductModel> productsList;
   final int index;
 
   @override
   Widget build(BuildContext context) {
-    double h = MediaQuery.of(context).size.height;
-    double w = MediaQuery.of(context).size.width;
+    FavController controller=FavController();
+
     return Container(
-        height: h / designHeight * 142,
+        height: getMediaQueryHeight(context, 142),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(
-            w / designWidth * 20,
+            getMediaQueryWidth(context, 20),
           ),
-          boxShadow: getBoxShadowApp(h),
+          boxShadow: getBoxShadowApp(),
           color: AppColor.white,
         ),
         child: Stack(
           children: [
             Padding(
-              padding: EdgeInsets.all(w / designWidth * 5),
+              padding: EdgeInsets.all(getMediaQueryWidth(context, 5)),
               child: Center(
                 child: CachedNetworkImage(
                   imageUrl: productsList[index].image ?? "",
                   progressIndicatorBuilder: (context, url, downloadProgress) =>
-                      CircularProgressIndicator(value: downloadProgress.progress),
-                  errorWidget: (context, url, error) =>Icon(Icons.error),
+                      CircularProgressIndicator(
+                          value: downloadProgress.progress),
+                  errorWidget: (context, url, error) => Icon(Icons.error),
                 ),
               ),
             ),
@@ -53,16 +55,32 @@ class ImageBox extends StatelessWidget {
                       .addToFav(productsList[index].id!);
                 },
                 child: Padding(
-                  padding: EdgeInsets.all(h / designHeight * 10),
-                  child: Image(
-                    width: h / designHeight * 20,
-                    height: h / designHeight * 20,
-                    image: Svg(
-                        BlocProvider.of<ProductsBloc>(context)
-                            .favList
-                            .contains(productsList[index].id!)
-                            ? ImagesPath.fav_red
-                            : ImagesPath.fav),
+                  padding: EdgeInsets.all(getMediaQueryWidth(context, 10)),
+                  child: AnimatedBuilder(
+                    animation: controller,
+                    builder: (context, child) => AnimatedSwitcher(
+                      duration: const Duration(milliseconds: 500),
+                      switchInCurve: Curves.linear,
+                      transitionBuilder: (child, animation) => ScaleTransition(
+                        scale: animation,
+                        child: child,
+                      ),
+                      child: BlocProvider.of<ProductsBloc>(context)
+                          .favList
+                          .contains(productsList[index].id!)
+                          ? Image(
+                        key: const ValueKey("red"),
+                        width: getMediaQueryHeight(context, 20),
+                        height: getMediaQueryHeight(context, 20),
+                        image: const Svg(ImagesPath.fav_red),
+                      )
+                          : Image(
+                        key: const ValueKey("notRed"),
+                        width: getMediaQueryHeight(context, 20),
+                        height: getMediaQueryHeight(context, 20),
+                        image: const Svg(ImagesPath.fav),
+                      ),
+                    ),
                   ),
                 ),
               ),
@@ -71,3 +89,5 @@ class ImageBox extends StatelessWidget {
         ));
   }
 }
+
+class FavController extends ChangeNotifier {}

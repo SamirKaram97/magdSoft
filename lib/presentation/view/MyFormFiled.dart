@@ -2,9 +2,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:magdsoft_flutter_structure/constants/string_manger.dart';
 
 import '../../constants/constatnts.dart';
+import '../responsive.dart';
 import '../styles/colors.dart';
 
 class MyFormFiled extends StatelessWidget {
@@ -19,13 +21,11 @@ class MyFormFiled extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double w = MediaQuery.of(context).size.width;
-    double h = MediaQuery.of(context).size.height;
     return Container(
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(w/designWidth*10),
+        borderRadius: BorderRadius.circular(10.sp),
         color: AppColor.white,
-        boxShadow: getBoxShadowApp(h)
+        boxShadow: getBoxShadowApp()
       ),
       child: TextFormField(
         controller: controller,
@@ -42,7 +42,7 @@ class MyFormFiled extends StatelessWidget {
               border: InputBorder.none,
               hintText: hint,
               contentPadding:
-                  EdgeInsetsDirectional.all(w / designWidth * 11))),
-    );
+                  EdgeInsetsDirectional.all(getMediaQueryWidth(context,11)),
+    )));
   }
 }

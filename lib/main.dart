@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:magdsoft_flutter_structure/business_logic/bloc_observer.dart';
@@ -11,6 +12,7 @@ import 'package:magdsoft_flutter_structure/business_logic/help_bloc/bloc.dart';
 import 'package:magdsoft_flutter_structure/business_logic/help_bloc/events.dart';
 import 'package:magdsoft_flutter_structure/business_logic/home_bloc/events.dart';
 import 'package:magdsoft_flutter_structure/business_logic/otp_bloc/bloc.dart';
+import 'package:magdsoft_flutter_structure/constants/constatnts.dart';
 import 'package:magdsoft_flutter_structure/data/data_providers/local/cache_helper.dart';
 import 'package:magdsoft_flutter_structure/data/data_providers/remote/dio_helper.dart';
 import 'package:magdsoft_flutter_structure/presentation/router/app_router.dart';
@@ -89,27 +91,28 @@ class _MyAppState extends State<MyApp> {
       child: BlocConsumer<GlobalCubit, GlobalState>(
         listener: (context, state) {},
         builder: (context, state) {
-          return Sizer(
-            builder: (context, orientation, deviceType) {
-              return LocalizedApp(
-                delegate,
-                LayoutBuilder(builder: (context, constraints) {
-                  return MaterialApp(
-                      debugShowCheckedModeBanner: false,
-                      localizationsDelegates: [
-                        GlobalCupertinoLocalizations.delegate,
-                        DefaultCupertinoLocalizations.delegate,
-                        GlobalMaterialLocalizations.delegate,
-                        GlobalWidgetsLocalizations.delegate,
-                        delegate,
-                      ],
-                      locale: delegate.currentLocale,
-                      supportedLocales: delegate.supportedLocales,
-                      onGenerateRoute: AppRouter.onGenerateRoute,
-                      theme: getAppTheme(context));
-                }),
+          return LocalizedApp(
+            delegate,
+            LayoutBuilder(builder: (context, constraints) {
+              return ScreenUtilInit(
+                builder: (context, child) => MaterialApp(
+                    debugShowCheckedModeBanner: false,
+                    localizationsDelegates: [
+                      GlobalCupertinoLocalizations.delegate,
+                      DefaultCupertinoLocalizations.delegate,
+                      GlobalMaterialLocalizations.delegate,
+                      GlobalWidgetsLocalizations.delegate,
+                      delegate,
+                    ],
+                    locale: delegate.currentLocale,
+                    supportedLocales: delegate.supportedLocales,
+                    onGenerateRoute: AppRouter.onGenerateRoute,
+                    theme: getAppTheme(context)),
+                designSize: const Size(designWidth,designHeight),
+                minTextAdapt: true,
+                splitScreenMode: true,
               );
-            },
+            }),
           );
         },
       ),

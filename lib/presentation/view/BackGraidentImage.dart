@@ -11,16 +11,15 @@ class BackGraidentImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double w = MediaQuery.of(context).size.width;
-    double h = MediaQuery.of(context).size.height;
+
     return Align(
       alignment: AlignmentDirectional.topCenter,
       child: Stack(
         children: [
           Image.asset(
             ImagesPath.pic,
-            height: h / 2,
-            width: w,
+            height:MediaQuery.of(context).size.height/ 2,
+            width: double.infinity,
           ),
           Container(color: AppColor.primaryBlue.withOpacity(0.5)),
         ],

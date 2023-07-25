@@ -6,6 +6,10 @@ import 'package:magdsoft_flutter_structure/business_logic/help_bloc/states.dart'
 import 'package:magdsoft_flutter_structure/constants/string_manger.dart';
 import 'package:magdsoft_flutter_structure/data/data_providers/local/cache_helper.dart';
 import 'package:magdsoft_flutter_structure/data/models/HelpModel.dart';
+import 'package:magdsoft_flutter_structure/presentation/responsive.dart';
+import 'package:magdsoft_flutter_structure/presentation/responsive.dart';
+import 'package:magdsoft_flutter_structure/presentation/responsive.dart';
+import 'package:magdsoft_flutter_structure/presentation/responsive.dart';
 import 'package:magdsoft_flutter_structure/presentation/router/app_router.dart';
 import 'package:magdsoft_flutter_structure/presentation/screens/shared/help/widgets/card_colun.dart';
 import 'package:magdsoft_flutter_structure/presentation/screens/shared/otp/otp_screen.dart';
@@ -29,8 +33,7 @@ class _HelpScreenState extends State<HelpScreen> {
 
 @override
   Widget build(BuildContext context) {
-    double w = MediaQuery.of(context).size.width;
-    double h = MediaQuery.of(context).size.height;
+
     return  BlocConsumer<HelpBloc,HelpState>(
       listener: (context, state) {},
       builder: (context, state) {
@@ -41,14 +44,15 @@ class _HelpScreenState extends State<HelpScreen> {
           children: [
             const BackGroundGraidentColor(),
             Padding(
-              padding:  EdgeInsets.only(left:w / designWidth * 16,right: w / designWidth * 16,top: w / designWidth * 50,bottom: w / designWidth * 20),
+              padding:  EdgeInsets.only(left:getMediaQueryWidth(context, 16) ,right: getMediaQueryWidth(context, 16) ,top: getMediaQueryWidth(context, 50) ,bottom: getMediaQueryWidth(context, 20) ),
               child: Column(
                 children: [
                   Text(StringsManger.help,style: Theme.of(context).textTheme.bodyLarge!.copyWith(color: AppColor.white),),
-                  Expanded(child: ListView.separated(itemBuilder: (context, index) =>AppCard(padding: EdgeInsets.all(w/designWidth*13),child: CardColumn(helpModelList: bloc.helpList!, index: index)) , separatorBuilder: (context, index) => SizedBox(height: h/932*27,), itemCount:bloc.helpList!.length)),
+                  Expanded(child: ListView.separated(itemBuilder: (context, index) =>AppCard(padding: EdgeInsets.all(
+                      getMediaQueryWidth(context, 13) ),child: CardColumn(helpModelList: bloc.helpList!, index: index)) , separatorBuilder: (context, index) => SizedBox(height:getMediaQueryHeight(context, 27),), itemCount:bloc.helpList!.length)),
                   AppButton(onPressed: (){
                     Navigator.pushReplacementNamed(context, RouteNames.homeRoute,arguments: widget.accountModel);
-                  }, text: StringsManger.continueW, height: w / designWidth * 50)
+                  }, text: StringsManger.continueW, height:getMediaQueryHeight(context, 50) )
 
                 ],
               ),

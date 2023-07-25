@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:magdsoft_flutter_structure/presentation/responsive.dart';
 
 import '../../../../../business_logic/home_bloc/bloc.dart';
 import '../../../../../constants/constatnts.dart';
@@ -28,12 +34,12 @@ class BigPicImageContainer extends StatelessWidget {
         .size
         .width;
     return AppContainer(
-      spreadRadius: h / designHeight * 5,
-      radius: h / designHeight * 20,
-      blurRadius: h / designHeight * 4,
-      xOffset: h / designHeight * 0,
-      yOffset: h / designHeight * 2,
-      height: h / designHeight * 300,
+      spreadRadius:  5.sp,
+      radius:  2.0.sp,
+      blurRadius:  4.sp,
+      xOffset:  0.sp,
+      yOffset:  2.sp,
+      height: getMediaQueryHeight(context, 300) ,
       width: double.infinity,
       child: Image.network(model.image!, fit: BoxFit.contain),
     );

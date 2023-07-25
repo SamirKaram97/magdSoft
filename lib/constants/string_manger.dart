@@ -15,6 +15,7 @@ class StringsManger
   static const verify="Verify";
   static const recommended="Recommended for You";
   static const itemAdded="Item added successfully";
+  static const itemRemoved="Item removed from favorites";
   static const all="All";
   static const acer="Acer";
   static const razer="Razer";

@@ -1,3 +1,4 @@
+import 'package:flutter/services.dart';
 import 'package:get_it/get_it.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:magdsoft_flutter_structure/business_logic/help_bloc/bloc.dart';
@@ -20,6 +21,10 @@ init()async
 {
   await CacheHelper.init();
   await DioHelper.init();
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]);
 
   //Bloc
   sl.registerFactory(() => LoginBloc(sl()));

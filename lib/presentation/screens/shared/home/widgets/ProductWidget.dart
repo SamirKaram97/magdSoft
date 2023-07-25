@@ -1,7 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg_provider/flutter_svg_provider.dart';
+import 'package:magdsoft_flutter_structure/presentation/responsive.dart';
 
 
 import '../../../../../business_logic/home_bloc/bloc.dart';
@@ -26,10 +28,9 @@ class ProductWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double h = MediaQuery.of(context).size.height;
-    double w = MediaQuery.of(context).size.width;
+
     return Padding(
-      padding: EdgeInsets.all(w / designWidth * 10),
+      padding: EdgeInsets.all(getMediaQueryWidth(context, 10)),
       child: InkWell(
         onTap: (){
           Navigator.pushNamed(context, RouteNames.productRoute,arguments: productsList[index]);
@@ -37,15 +38,15 @@ class ProductWidget extends StatelessWidget {
         child: Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(
-              w / designWidth * 20,
+              20.sp,
             ),
-            boxShadow: getBoxShadowApp(h),
+            boxShadow: getBoxShadowApp(),
             color: AppColor.white,
           ),
           child: Column(
             children: [
               ImageBox( productsList: productsList, index: index),
-              SizedBox(height: h/designHeight*5,),
+              SizedBox(height:getMediaQueryHeight(context, 5)),
               TypeAndPriceBox(productsList: productsList, index: index),
             ],
           ),

@@ -39,8 +39,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
-    double w=MediaQuery.of(context).size.width;
-    double h=MediaQuery.of(context).size.height;
+
     return Scaffold(
       body: Center(
         child: Stack(
@@ -48,10 +47,10 @@ class _SplashScreenState extends State<SplashScreen> {
           children: [
             Container(color: AppColor.primaryBlue,),
             Padding(
-              padding: EdgeInsets.symmetric(vertical: h*0.1),
+              padding: EdgeInsets.symmetric(vertical: MediaQuery.sizeOf(context).width*0.1),
               child: Container(decoration: const BoxDecoration(image: DecorationImage(image: AssetImage(ImagesPath.behindLogo),fit: BoxFit.fill)),),
             ),
-            Image.asset(ImagesPath.logo,width: w*0.6),
+            Image.asset(ImagesPath.logo,width: MediaQuery.sizeOf(context).width*0.6),
           ],
         )
       ),

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:magdsoft_flutter_structure/constants/string_manger.dart';
+import 'package:magdsoft_flutter_structure/presentation/responsive.dart';
 
 
 import '../../../../../business_logic/home_bloc/bloc.dart';
@@ -20,35 +22,27 @@ class StoreInfoRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double h = MediaQuery
-        .of(context)
-        .size
-        .height;
-    double w = MediaQuery
-        .of(context)
-        .size
-        .width;
     return AppContainer(
-        radius: h / designHeight * 10,
+        radius: 10.sp,
         xOffset: 0,
-        yOffset: h / designHeight * 2,
-        blurRadius: h / designHeight * 4,
-        spreadRadius: h / designHeight * 5,
+        yOffset:  2.sp,
+        blurRadius:  4.sp,
+        spreadRadius:  5.sp,
         child: Padding(
-          padding: EdgeInsets.all(h / designHeight * 5),
+          padding: EdgeInsets.all(getMediaQueryHeight(context, 5)),
           child: Row(
             children: [
               AppContainer(
-                  height: h / designHeight * 55,
-                  width: w / designWidth * 55,
-                  radius: h / designHeight * 10,
+                  height: getMediaQueryHeight(context, 55),
+                  width: getMediaQueryWidth(context, 55),
+                  radius: 10.sp,
                   xOffset: 0,
                   yOffset: 0,
-                  blurRadius: h / designHeight * 4,
-                  spreadRadius: h / designHeight * 2,
+                  blurRadius: 4.sp,
+                  spreadRadius: 2.sp,
                   child: Image.asset(ImagesPath.acerll)),
               SizedBox(
-                width: w / designWidth * 12,
+                width: getMediaQueryWidth(context, 12),
               ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -59,7 +53,7 @@ class StoreInfoRow extends StatelessWidget {
                   ),
                   Text(
                     StringsManger.viewStore,
-                    style: Theme.of(context).textTheme.displaySmall!.copyWith(fontSize: w/designWidth*12),
+                    style: Theme.of(context).textTheme.displaySmall!.copyWith(fontSize:12.sp),
                   ),
                 ],
               ),
@@ -67,13 +61,13 @@ class StoreInfoRow extends StatelessWidget {
               InkWell(
                 onTap: () {},
                 child: AppContainer(
-                  spreadRadius: h / designHeight * 1,
-                  radius: h / designHeight * 5,
-                  blurRadius: h / designHeight * 4,
-                  xOffset: h / designHeight * 0,
-                  yOffset: h / designHeight * 2,
-                  height: h / designHeight * 30,
-                  width: h / designHeight * 30,
+                  spreadRadius:1.sp,
+                  radius:5.sp ,
+                  blurRadius:4.sp,
+                  xOffset:0,
+                  yOffset:2.sp ,
+                  height:getMediaQueryHeight(context, 30) ,
+                  width:getMediaQueryWidth(context, 30) ,
                   child: const Icon(Icons.keyboard_arrow_left_outlined),
                 ),
               ),

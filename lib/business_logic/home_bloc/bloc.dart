@@ -57,12 +57,14 @@ class ProductsBloc extends Bloc<GetProductsEvent, ProductsState> {
   Future addToFav(int id) async {
     if (favList.contains(id)) {
       favList.remove(id);
+      emit(ProductsRemovedFromFavState(id));
     } else {
       favList.add(id);
+      emit(ProductsAddedToFavState(id));
     }
     await CacheHelper.saveDataSharedPreference(
         key: "fav", value: jsonEncode(favList));
-    emit(ProductsAddtoFavState(id));
+
   }
 
   void getFav() {

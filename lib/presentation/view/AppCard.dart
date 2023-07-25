@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../business_logic/help_bloc/bloc.dart';
 import '../../constants/constatnts.dart';
@@ -15,10 +16,9 @@ class AppCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double w = MediaQuery.of(context).size.width;
-    double h = MediaQuery.of(context).size.height;
+
     return Container(
-      decoration: BoxDecoration(boxShadow: [BoxShadow(color: AppColor.shadowColor.withOpacity(0.25),offset: Offset(w/designWidth*2, w/designWidth*2),blurRadius: w/designWidth*8,spreadRadius: w/designWidth*2),]),
+      decoration: BoxDecoration(boxShadow: [BoxShadow(color: AppColor.shadowColor.withOpacity(0.25),offset: Offset(2.sp,2.sp),blurRadius: 8.sp,spreadRadius: 2.sp),]),
       child: Card(
         child: Padding(
           padding:  padding,

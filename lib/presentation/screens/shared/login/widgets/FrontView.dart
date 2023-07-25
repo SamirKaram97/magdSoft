@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:magdsoft_flutter_structure/constants/string_manger.dart';
+import 'package:magdsoft_flutter_structure/presentation/responsive.dart';
+import 'package:magdsoft_flutter_structure/presentation/responsive.dart';
 
 import '../../../../../business_logic/login_bloc/bloc.dart';
 import '../../../../../business_logic/login_bloc/events.dart';
@@ -16,9 +19,8 @@ import '../../../../view/social_button.dart';
 import '../../../../widget/toast.dart';
 
 class FrontView extends StatefulWidget {
-   FrontView({
+  FrontView({
     Key? key,
-
   }) : super(key: key);
 
   @override
@@ -38,33 +40,26 @@ class _FrontViewState extends State<FrontView> {
 
   static final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
-  loginClick(context)
-  {
-    if(formKey.currentState!.validate())
-    {
-      BlocProvider.of<LoginBloc>(context).add(
-          LoginExecuteEvent(LoginRequest(
-              name: nameController.text,
-              phone: phoneController.text)));}
-    else{}
+  loginClick(context) {
+    if (formKey.currentState!.validate()) {
+      BlocProvider.of<LoginBloc>(context).add(LoginExecuteEvent(LoginRequest(
+          name: nameController.text, phone: phoneController.text)));
+    } else {}
   }
 
   @override
   Widget build(BuildContext context) {
     double w = MediaQuery.of(context).size.width;
     double h = MediaQuery.of(context).size.height;
-     return BlocConsumer<LoginBloc, LoginState>(
+    return BlocConsumer<LoginBloc, LoginState>(
       listener: (context, state) {
-        if(state is LoginSuccessState)
-        {
-          showToast(text: state.message,state: ToastState.SUCCESS);
-          Navigator.pushNamed(context, RouteNames.otpRoute,arguments: phoneController.text);
+        if (state is LoginSuccessState) {
+          showToast(text: state.message, state: ToastState.SUCCESS);
+          Navigator.pushNamed(context, RouteNames.otpRoute,
+              arguments: phoneController.text);
+        } else if (state is LoginErrorState) {
+          showToast(text: state.message, state: ToastState.EROOR);
         }
-        else if(state is LoginErrorState)
-        {
-          showToast(text:state.message,state: ToastState.EROOR);
-        }
-
       },
       builder: (context, state) {
         return Align(
@@ -73,40 +68,42 @@ class _FrontViewState extends State<FrontView> {
             mainAxisSize: MainAxisSize.min,
             children: [
               Container(
-                width: w / designWidth * 372,
+                width: getMediaQueryWidth(context, 372),
                 decoration: BoxDecoration(
                     color: AppColor.white,
-                    borderRadius: BorderRadius.circular(w / designWidth * 40),
-                    boxShadow: getBoxShadowApp(h)),
+                    borderRadius: BorderRadius.circular(40.sp),
+                    boxShadow: getBoxShadowApp()),
                 child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: w / designWidth * 25,vertical:h / designHeight * 25),
+                  padding: EdgeInsets.symmetric(
+                      horizontal: getMediaQueryWidth(context, 25),
+                      vertical: getMediaQueryHeight(context, 25)),
                   child: Form(
                     key: formKey,
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         SizedBox(
-                          height: h/designHeight * 27,
+                          height:getMediaQueryHeight(context, 27) ,
                         ),
                         Text(
                           StringsManger.welcome,
                           style: Theme.of(context).textTheme.bodyLarge,
                         ),
-                        SizedBox(height: h/designHeight * 15.66),
+                        SizedBox(height:getMediaQueryHeight(context, 15.66) ),
                         Container(
                           color: AppColor.primaryBlue.withOpacity(0.72),
-                          height: h/designHeight * 3.13,
-                          width: w / designWidth * 143,
+                          height:getMediaQueryHeight(context, 3.13) ,
+                          width: getMediaQueryWidth(context, 143),
                         ),
                         SizedBox(
-                          height: h/designHeight * 27,
+                          height:getMediaQueryHeight(context, 27) ,
                         ),
                         MyFormFiled(
                             textInputType: TextInputType.name,
                             controller: nameController,
                             hint: StringsManger.nameHint),
                         SizedBox(
-                          height: h/designHeight * 17,
+                          height:getMediaQueryHeight(context, 17) ,
                         ),
                         MyFormFiled(
                           textInputType: TextInputType.phone,
@@ -114,12 +111,12 @@ class _FrontViewState extends State<FrontView> {
                           hint: StringsManger.phoneHint,
                         ),
                         SizedBox(
-                          height: h/designHeight * 30,
+                          height:getMediaQueryHeight(context, 30) ,
                         ),
                         AppButton(
-                            height: h/designHeight * 50,
+                            height:getMediaQueryHeight(context, 50) ,
                             text: StringsManger.login,
-                            onPressed: (){
+                            onPressed: () {
                               loginClick(context);
                             }),
                       ],
@@ -128,13 +125,14 @@ class _FrontViewState extends State<FrontView> {
                 ),
               ),
               SizedBox(
-                height: h/designHeight * 127,
+                height:getMediaQueryHeight(context, 127) ,
               ),
               Row(
                 children: [
                   Expanded(
                     child: Padding(
-                      padding: EdgeInsetsDirectional.only(start: w * 30 / designWidth),
+                      padding: EdgeInsetsDirectional.only(
+                          start: w * 30 / designWidth),
                       child: Container(
                         height: 1,
                         color: AppColor.primaryBlue,
@@ -142,15 +140,17 @@ class _FrontViewState extends State<FrontView> {
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.symmetric(horizontal: w * 10 / designWidth),
+                    padding:
+                        EdgeInsets.symmetric(horizontal: getMediaQueryWidth(context, 10)),
                     child: Text(StringsManger.or,
                         style: Theme.of(context).textTheme.titleSmall),
                   ),
                   Expanded(
                     child: Padding(
-                      padding: EdgeInsetsDirectional.only(end: w * 30 / designWidth),
+                      padding:
+                          EdgeInsetsDirectional.only(end: getMediaQueryWidth(context, 30)),
                       child: Container(
-                        height: h / 617 * 1,
+                        height: getMediaQueryHeight(context, 1) ,
                         color: AppColor.primaryBlue,
                       ),
                     ),
@@ -163,11 +163,12 @@ class _FrontViewState extends State<FrontView> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  for (int i = 0; i < 3; i++) SocialButton(image: socialImages[i])
+                  for (int i = 0; i < 3; i++)
+                    SocialButton(image: socialImages[i])
                 ],
               ),
               SizedBox(
-                height: h/designHeight * 100,
+                height:getMediaQueryHeight(context, 100) ,
               )
             ],
           ),

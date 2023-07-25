@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../constants/constatnts.dart';
 
@@ -12,8 +13,9 @@ class AppColor{
   static const Color red = Colors.red;
 
 }
- getBoxShadowApp(double h)=>[BoxShadow(
+ getBoxShadowApp()=>[BoxShadow(
 color: AppColor.shadowColor.withOpacity(0.25),
-offset: Offset(h/designHeight*2,h/designHeight*2),
-blurRadius: h/designHeight*8
+offset: Offset(2.w,2.h),
+spreadRadius: 4.sp,
+blurRadius: 8.sp
 )];

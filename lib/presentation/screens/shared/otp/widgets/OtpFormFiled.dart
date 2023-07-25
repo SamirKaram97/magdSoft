@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:magdsoft_flutter_structure/constants/string_manger.dart';
+import 'package:magdsoft_flutter_structure/presentation/responsive.dart';
+import 'package:magdsoft_flutter_structure/presentation/responsive.dart';
+import 'package:magdsoft_flutter_structure/presentation/responsive.dart';
 
 import '../../../../../constants/constatnts.dart';
 import '../../../../styles/colors.dart';
@@ -22,17 +25,16 @@ class OtpFormFiled extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double w = MediaQuery.of(context).size.width;
-    double h = MediaQuery.of(context).size.height;
+
     return Padding(
-      padding: EdgeInsets.all(w / designWidth * 9.5),
+      padding: EdgeInsets.all(getMediaQueryWidth(context, 9.5) ),
       child: Container(
-        width: w / designWidth * 70,
-        height: w / designWidth * 80,
+        width: getMediaQueryWidth(context, 70) ,
+        height: getMediaQueryHeight(context, 80) ,
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(w / designWidth * 15),
+            borderRadius: BorderRadius.circular(getMediaQueryWidth(context, 15) ),
             color: AppColor.white,
-            boxShadow: getBoxShadowApp(h)),
+            boxShadow: getBoxShadowApp()),
         child: Center(
           child: TextFormField(
               controller: controller,
@@ -56,7 +58,7 @@ class OtpFormFiled extends StatelessWidget {
               ],
               decoration: InputDecoration(
                   border: InputBorder.none,
-                  contentPadding: EdgeInsetsDirectional.all(w / designWidth * 9.5))),
+                  contentPadding: EdgeInsetsDirectional.all(getMediaQueryWidth(context, 9.5) ))),
         ),
       ),
     );

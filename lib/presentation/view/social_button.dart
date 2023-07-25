@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:magdsoft_flutter_structure/presentation/responsive.dart';
 import 'package:magdsoft_flutter_structure/presentation/styles/colors.dart';
 
 import '../../constants/assets_manger.dart';
@@ -11,20 +12,18 @@ class SocialButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final double w = MediaQuery.of(context).size.width;
-    final double h = MediaQuery.of(context).size.height;
     return Padding(
-      padding: EdgeInsets.all(w / designWidth * 14.0),
+      padding: EdgeInsets.all(getMediaQueryWidth(context, 14)),
       child: Container(
-          height: w / designWidth * 52,
-          width: w / designWidth * 52,
+          height: getMediaQueryHeight(context, 52),
+          width: getMediaQueryWidth(context, 52),
           decoration: BoxDecoration(
             color: AppColor.white,
             shape: BoxShape.circle,
-            boxShadow: getBoxShadowApp(h),
+            boxShadow: getBoxShadowApp(),
           ),
           child: Padding(
-            padding: EdgeInsets.all(w * 8.0 / designWidth),
+            padding: EdgeInsets.all(getMediaQueryWidth(context, 8)),
             child: Image.asset(image, fit: BoxFit.fitHeight),
           )),
     );
