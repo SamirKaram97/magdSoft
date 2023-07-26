@@ -1,8 +1,10 @@
 import 'dart:convert';
 
 import 'package:bloc/bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:magdsoft_flutter_structure/business_logic/help_bloc/states.dart';
 import 'package:magdsoft_flutter_structure/business_logic/home_bloc/states.dart';
+import 'package:magdsoft_flutter_structure/business_logic/layout_cubit/layout_cubit.dart';
 import 'package:magdsoft_flutter_structure/business_logic/login_bloc/states.dart';
 import 'package:magdsoft_flutter_structure/business_logic/usecase/get_products_usecase.dart';
 import 'package:magdsoft_flutter_structure/business_logic/usecase/login_usecase.dart';
@@ -18,8 +20,7 @@ class ProductsBloc extends Bloc<GetProductsEvent, ProductsState> {
   List<ProductModel>? acer;
   List<ProductModel>? razer;
 
-  List<int> favList = [];
-  int selectedIndex = 0;
+  int selectedCategoryIndex = 0;
 
   ProductsBloc(this.getProductUseCase) : super(ProductsInitialState()) {
     on((event, emit) async {
@@ -49,30 +50,14 @@ class ProductsBloc extends Bloc<GetProductsEvent, ProductsState> {
     });
   }
 
-  void changeSelectedIndex(int index) {
-    selectedIndex = index;
+  void changeSelectedCategoryIndex(int index) {
+    selectedCategoryIndex = index;
     emit(ProductsChangeSelectedIndexState());
   }
 
-  Future addToFav(int id) async {
-    if (favList.contains(id)) {
-      favList.remove(id);
-      emit(ProductsRemovedFromFavState(id));
-    } else {
-      favList.add(id);
-      emit(ProductsAddedToFavState(id));
-    }
-    await CacheHelper.saveDataSharedPreference(
-        key: "fav", value: jsonEncode(favList));
-
-  }
-
-  void getFav() {
-    String? stringFavList = CacheHelper.getDataFromSharedPreference(key: "fav");
-    if (stringFavList != null) {
-      favList = json.decode(stringFavList).cast<int>();
-    }
-
-    print(favList);
+  void changeFav(context,int id)async
+  {
+    await LayoutCubit.get(context).addProductToFav(id);
+    emit(ChangeFavState());
   }
 }

@@ -28,13 +28,13 @@ class CategoryItemListWidget extends StatelessWidget {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(30.sp),
           boxShadow: getBoxShadowApp(),
-          color: cubit.selectedIndex == index
+          color: cubit.selectedCategoryIndex == index
               ? AppColor.primaryBlue
               : AppColor.white,
         ),
         child: InkWell(
           onTap: () {
-            cubit.changeSelectedIndex(index);
+            cubit.changeSelectedCategoryIndex(index);
           },
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -55,7 +55,7 @@ class CategoryItemListWidget extends StatelessWidget {
                   ))),
               Text(
                 ItemModel.title,
-                style: cubit.selectedIndex == index
+                style: cubit.selectedCategoryIndex == index
                     ?  Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 22.sp)
                     :Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 22.sp,color: AppColor.black),
               )

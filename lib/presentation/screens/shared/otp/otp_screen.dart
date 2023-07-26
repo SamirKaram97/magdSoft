@@ -43,7 +43,7 @@ class _OtpScreenState extends State<OtpScreen> {
         if(state is OtpSuccessState)
         {
           showToast(text: "welcome ${state.accountModel.name}",state: ToastState.SUCCESS);
-          Navigator.pushNamed(context, RouteNames.helpRoute,arguments: state.accountModel);
+          Navigator.pushNamed(context, RouteNames.helpRoute);
         }
         else if(state is OtpErrorState)
         {

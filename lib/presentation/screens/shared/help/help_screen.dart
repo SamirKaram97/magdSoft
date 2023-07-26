@@ -22,8 +22,7 @@ import '../../../view/AppCard.dart';
 import '../../../view/BackGroundGraidentColor.dart';
 
 class HelpScreen extends StatefulWidget {
-  HelpScreen({Key? key, required this.accountModel}) : super(key: key);
-  final AccountModel accountModel;
+  HelpScreen({Key? key}) : super(key: key);
 
   @override
   State<HelpScreen> createState() => _HelpScreenState();
@@ -51,7 +50,7 @@ class _HelpScreenState extends State<HelpScreen> {
                   Expanded(child: ListView.separated(itemBuilder: (context, index) =>AppCard(padding: EdgeInsets.all(
                       getMediaQueryWidth(context, 13) ),child: CardColumn(helpModelList: bloc.helpList!, index: index)) , separatorBuilder: (context, index) => SizedBox(height:getMediaQueryHeight(context, 27),), itemCount:bloc.helpList!.length)),
                   AppButton(onPressed: (){
-                    Navigator.pushReplacementNamed(context, RouteNames.homeRoute,arguments: widget.accountModel);
+                    Navigator.pushReplacementNamed(context, RouteNames.layoutRoute);
                   }, text: StringsManger.continueW, height:getMediaQueryHeight(context, 50) )
 
                 ],

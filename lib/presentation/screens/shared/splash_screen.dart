@@ -31,7 +31,7 @@ class _SplashScreenState extends State<SplashScreen> {
       }
       else
         {
-          Navigator.pushReplacementNamed(context, RouteNames.homeRoute,arguments: AccountModel.fromJson(json.decode(accountModelString)));
+          Navigator.pushReplacementNamed(context, RouteNames.layoutRoute);
         }
     });
     super.initState();

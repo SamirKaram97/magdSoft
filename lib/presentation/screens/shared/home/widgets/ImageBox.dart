@@ -5,6 +5,8 @@ import 'package:flutter_svg_provider/flutter_svg_provider.dart';
 import 'package:magdsoft_flutter_structure/presentation/responsive.dart';
 
 import '../../../../../business_logic/home_bloc/bloc.dart';
+import '../../../../../business_logic/home_bloc/states.dart';
+import '../../../../../business_logic/layout_cubit/layout_cubit.dart';
 import '../../../../../constants/assets_manger.dart';
 import '../../../../../constants/constatnts.dart';
 import '../../../../../data/models/product_model.dart';
@@ -51,8 +53,7 @@ class ImageBox extends StatelessWidget {
               alignment: AlignmentDirectional.topEnd,
               child: InkWell(
                 onTap: () async {
-                  await BlocProvider.of<ProductsBloc>(context)
-                      .addToFav(productsList[index].id!);
+                  BlocProvider.of<ProductsBloc>(context).changeFav(context, productsList[index].id??0);
                 },
                 child: Padding(
                   padding: EdgeInsets.all(getMediaQueryWidth(context, 10)),
@@ -65,7 +66,7 @@ class ImageBox extends StatelessWidget {
                         scale: animation,
                         child: child,
                       ),
-                      child: BlocProvider.of<ProductsBloc>(context)
+                      child: LayoutCubit.get(context)
                           .favList
                           .contains(productsList[index].id!)
                           ? Image(

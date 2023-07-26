@@ -15,6 +15,7 @@ import 'package:magdsoft_flutter_structure/business_logic/otp_bloc/bloc.dart';
 import 'package:magdsoft_flutter_structure/constants/constatnts.dart';
 import 'package:magdsoft_flutter_structure/data/data_providers/local/cache_helper.dart';
 import 'package:magdsoft_flutter_structure/data/data_providers/remote/dio_helper.dart';
+
 import 'package:magdsoft_flutter_structure/presentation/router/app_router.dart';
 import 'package:magdsoft_flutter_structure/presentation/styles/colors.dart';
 import 'package:magdsoft_flutter_structure/presentation/styles/theme.dart';
@@ -23,6 +24,7 @@ import 'package:sizer/sizer.dart';
 import 'package:intl/intl.dart';
 
 import 'business_logic/home_bloc/bloc.dart';
+import 'business_logic/layout_cubit/layout_cubit.dart';
 import 'business_logic/login_bloc/bloc.dart';
 import 'di.dart';
 
@@ -85,8 +87,12 @@ class _MyAppState extends State<MyApp> {
           create: (context) => HelpBloc(sl())..add(HelpExecuteEvent()),
         ),
         BlocProvider(
-          create: (context) => ProductsBloc(sl())..add(GetProductsExecuteEvent())..getFav(),
+          create: (context) => ProductsBloc(sl())
+            ..add(GetProductsExecuteEvent())
         ),
+        BlocProvider(
+          create: (context) => LayoutCubit()..getFavProducts(),
+        )
       ],
       child: BlocConsumer<GlobalCubit, GlobalState>(
         listener: (context, state) {},
@@ -108,7 +114,7 @@ class _MyAppState extends State<MyApp> {
                     supportedLocales: delegate.supportedLocales,
                     onGenerateRoute: AppRouter.onGenerateRoute,
                     theme: getAppTheme(context)),
-                designSize: const Size(designWidth,designHeight),
+                designSize: const Size(designWidth, designHeight),
                 minTextAdapt: true,
                 splitScreenMode: true,
               );
